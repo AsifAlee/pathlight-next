@@ -12,6 +12,7 @@ export async function POST(request: NextRequest) {
         }
 
         const ANAM_API_KEY = process.env.NEXT_PUBLIC_ANAM_API_KEY;
+        console.log("ANAM_API_KEY", ANAM_API_KEY);
 
         if (!ANAM_API_KEY) {
             return NextResponse.json(
@@ -30,10 +31,11 @@ export async function POST(request: NextRequest) {
             body: JSON.stringify({
                 personaConfig: {
                     name: 'PathLight Counselor',
-                    avatarId: '30fa96d0-26c4-4e55-94a0-517025942e18',
-                    voiceId: '6bfbe25a-979d-40f3-a92b-5394170af54b',
+
+                    avatarId: '307885c3-5ee3-4fbc-807c-909f0036f187',
+                    voiceId: 'e54745c7-9439-44c3-b61a-193b42cce5bd',
                     llmId: '0934d97d-0c3a-4f33-91b0-5e136a0ef466',
-                    systemPrompt: 'You are a compassionate and professional mental health counselor for students. Provide supportive, empathetic guidance while maintaining appropriate boundaries. Keep responses conversational and helpful.',
+                    systemPrompt: 'you are william shakespear that talks alot about love and poetry',
                 },
             }),
         });

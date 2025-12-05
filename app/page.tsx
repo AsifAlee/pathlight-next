@@ -170,7 +170,7 @@ export default function Home() {
                 </button>
               </div>
 
-              {/* Avatar Selector Mini-Gallery */}
+
               <div className="pt-6">
                 <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Select your guide to preview</p>
                 <div className="flex gap-3">
@@ -190,13 +190,13 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Live Call Avatar Demo */}
+
             <div className="relative z-10 flex justify-center lg:justify-end">
               <div className="relative w-80 sm:w-96 aspect-[9/16] bg-slate-900 rounded-[3rem] shadow-2xl overflow-hidden border-8 border-slate-900 ring-1 ring-slate-900/10 transition-all duration-500">
-                {/* Background Avatar */}
+
                 <div className="absolute inset-0">
                   <img
-                    key={activeAvatar.id} // Key change forces animation re-render
+                    key={activeAvatar.id}
                     src={activeAvatar.image}
                     alt="Active Avatar"
                     className="w-full h-full object-cover opacity-90 transition-opacity duration-500 animate-[fadeIn_0.5s_ease-in-out]"
@@ -204,14 +204,14 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80"></div>
                 </div>
 
-                {/* UI Overlay */}
+
                 <div className="absolute inset-0 flex flex-col justify-between p-6">
                   <div className="flex justify-between items-center text-white/90">
-                    {/* Identity Badge - UPDATED STYLE */}
+
                     <div className="flex items-stretch rounded-lg overflow-hidden shadow-lg select-none transform transition-transform hover:scale-105 border border-white/10">
                       <div className="w-10 flex items-center justify-center bg-slate-800 relative">
                         <Mic size={16} className="text-white z-10" />
-                        {/* Active Indicator Line */}
+
                         <div className="absolute bottom-0 left-0 w-full h-[3px] bg-primary"></div>
                       </div>
                       <div className="px-3 py-1.5 bg-slate-900/90 backdrop-blur-md flex items-center border-l border-white/5">
@@ -245,7 +245,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Decorative Elements */}
+
               <div className={`absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-400/20 rounded-full blur-3xl animate-pulse transition-colors duration-500`}></div>
             </div>
           </div>
@@ -308,7 +308,7 @@ export default function Home() {
             <p className="text-slate-600 text-lg">We've made getting help as easy as sending a text or hopping on a call.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-            {/* Connecting Line */}
+
             <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gradient-to-r from-primary/20 via-primary/50 to-primary/20"></div>
 
             {[
@@ -373,7 +373,7 @@ export default function Home() {
               <p className="text-slate-400 text-lg">We designed our platform to solve the most pressing challenges in student mental health today.</p>
             </div>
             <button onClick={() => navigateTo('Case Studies')} className="bg-white text-slate-900 px-6 py-3 rounded-full font-bold hover:bg-slate-100 transition-colors">
-              View Benefit Report
+              View Benefit
             </button>
           </div>
 
@@ -425,7 +425,7 @@ export default function Home() {
               </button>
             </div>
             <div className="relative group cursor-pointer">
-              {/* Dashboard Mockup */}
+
               <div className="bg-slate-900 rounded-3xl border-8 border-slate-900 shadow-2xl overflow-hidden transform group-hover:scale-[1.02] transition-transform duration-500">
                 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000" alt="Dashboard" className="opacity-80 hover:opacity-100 transition-opacity" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
@@ -442,7 +442,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Floating Badge */}
+
               <div className="absolute -top-6 -right-6 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-3 animate-bounce delay-700">
                 <Users className="text-primary" size={24} />
                 <div>
@@ -475,8 +475,7 @@ export default function Home() {
       {/* Footer */}
       <Footer onNavigate={navigateTo} />
 
-      {/* Auth Modal */}
-      {/* Auth Modal Removed */}
+
     </div>
   );
 
