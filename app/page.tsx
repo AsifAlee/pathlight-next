@@ -274,7 +274,7 @@ export default function Home() {
             <p className="text-slate-600 text-lg">Mental health isn't one-size-fits-all. Our platform offers a range of AI personalities modeled after real counseling styles.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="md:p-0 p-8  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {AVATARS.map((avatar) => (
               <div key={avatar.id} className="group relative rounded-3xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300 bg-slate-100" onClick={() => { setActiveAvatar(avatar); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
                 <div className="aspect-[3/4] overflow-hidden">
