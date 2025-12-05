@@ -3,8 +3,9 @@
 import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { Logo } from "../components/Logo";
-import { ArrowRight, Mail, Lock, School, User, CheckCircle } from "lucide-react";
+import { ArrowRight, Mail, Lock, School, User, CheckCircle, Eye, EyeOff } from "lucide-react";
 
 function SignInContent() {
     const searchParams = useSearchParams();
@@ -13,6 +14,7 @@ function SignInContent() {
     const [userType, setUserType] = useState<'student' | 'school'>(initialType);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
@@ -27,7 +29,7 @@ function SignInContent() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ email: email.trim(), password: password.trim() }),
             });
 
             const data = await res.json();
@@ -39,6 +41,8 @@ function SignInContent() {
             // Store token and user info
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
+
+            toast.success("Successfully signed in!");
 
             // Redirect to dashboard
             router.push('/dashboard');
@@ -119,13 +123,20 @@ function SignInContent() {
                             <div className="relative">
                                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
                                 <input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3.5 focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all text-slate-900 placeholder:text-slate-400"
+                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-12 py-3.5 focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all text-slate-900 placeholder:text-slate-400"
                                     placeholder="••••••••"
                                     required
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                                >
+                                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                </button>
                             </div>
                         </div>
 

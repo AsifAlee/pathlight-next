@@ -10,8 +10,8 @@ export async function POST(request: NextRequest) {
 
         const { email, password } = await request.json();
 
-        // Check if user exists
-        const user = await User.findOne({ email });
+        // Check if user exists (case-insensitive email)
+        const user = await User.findOne({ email: email.toLowerCase() });
         if (!user) {
             return NextResponse.json(
                 { message: 'Invalid Credentials' },

@@ -2,22 +2,27 @@
 
 body {
   font-family: "Inter", sans-serif;
-  background-color: #fff7ed; /* Orange 50 */
+  background-color: #fff7ed;
+  /* Orange 50 */
 }
+
 /* Custom scrollbar for chat */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
 @theme {
   --font-sans: "Inter", sans-serif;
   --color-primary: #f97316;
   --color-secondary: #f59e0b;
   --color-accent: #fbbf24;
 }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

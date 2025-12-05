@@ -3,8 +3,9 @@
 import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { Logo } from "../components/Logo";
-import { ArrowRight, Mail, Lock, School, User, CheckCircle, UserCircle } from "lucide-react";
+import { ArrowRight, Mail, Lock, School, User, CheckCircle, UserCircle, Eye, EyeOff } from "lucide-react";
 
 function SignUpContent() {
     const searchParams = useSearchParams();
@@ -14,6 +15,7 @@ function SignUpContent() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
@@ -28,7 +30,7 @@ function SignUpContent() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, email, password, role: userType }),
+                body: JSON.stringify({ name: name.trim(), email: email.trim(), password: password.trim(), role: userType }),
             });
 
             const data = await res.json();
@@ -40,6 +42,8 @@ function SignUpContent() {
             // Store token and user info
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
+
+            toast.success("Account created successfully! Please sign in.");
 
             // Redirect to signin
             router.push(`/signin?type=${userType}`);
@@ -135,13 +139,20 @@ function SignUpContent() {
                             <div className="relative">
                                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
                                 <input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3.5 focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all text-slate-900 placeholder:text-slate-400"
+                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-12 py-3.5 focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all text-slate-900 placeholder:text-slate-400"
                                     placeholder="Create a strong password"
                                     required
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                                >
+                                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                </button>
                             </div>
                         </div>
 

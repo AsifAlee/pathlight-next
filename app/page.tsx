@@ -12,6 +12,8 @@ import InfoPage from './components/InfoPage';
 import Multilingual from './components/Multilingual';
 import WhatItOffers from './components/WhatItOffers';
 import { Logo } from './components/Logo';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Role } from "@/types";
@@ -99,7 +101,7 @@ export default function Home() {
     return (
       <>
         {/* Navigation for Dashboard */}
-        <nav className="fixed w-full z-50 bg-white border-b border-orange-100">
+        <nav className=" test-style fixed w-full z-50 bg-white border-b border-orange-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16 items-center">
               <div className="flex items-center gap-2 cursor-pointer" onClick={() => setCurrentRole(null)}>
@@ -138,51 +140,7 @@ export default function Home() {
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-primary/20">
 
       {/* Navbar */}
-      <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-orange-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-20 items-center">
-            <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigateTo('home')}>
-              <div className="text-primary">
-                <Logo className="w-8 h-8" />
-
-              </div>
-
-            </div>
-
-            <div className="hidden lg:flex items-center gap-8">
-              <button onClick={() => navigateTo('#features')} className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Features</button>
-              <button onClick={() => navigateTo('#how-it-works')} className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">How it Works</button>
-              <button onClick={() => navigateTo('#guides')} className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Our Guides</button>
-              <div className="flex items-center gap-3 pl-4 border-l border-slate-200">
-                <button onClick={() => openAuth('school')} className="text-sm font-medium text-slate-600 hover:text-primary px-3 py-2">School Portal</button>
-                <button onClick={() => openAuth('student')} className="bg-slate-900 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-slate-800 transition-all shadow-md hover:shadow-lg">
-                  Student Access
-                </button>
-              </div>
-            </div>
-
-            <div className="lg:hidden">
-              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-slate-600">
-                {isMenuOpen ? <X /> : <Menu />}
-              </button>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="lg:hidden bg-white border-b border-orange-100 p-4 space-y-4 shadow-xl absolute w-full top-20 left-0 z-40">
-            <button onClick={() => { navigateTo('#features'); setIsMenuOpen(false); }} className="block w-full text-left text-slate-600 font-medium py-2">Features</button>
-            <button onClick={() => { navigateTo('#how-it-works'); setIsMenuOpen(false); }} className="block w-full text-left text-slate-600 font-medium py-2">How it Works</button>
-            <button onClick={() => { navigateTo('#guides'); setIsMenuOpen(false); }} className="block w-full text-left text-slate-600 font-medium py-2">Our Guides</button>
-            <div className="pt-4 border-t border-slate-100 flex flex-col gap-3">
-              <button onClick={() => { openAuth('school'); setIsMenuOpen(false); }} className="w-full text-center py-3 text-slate-600 font-medium bg-orange-50 rounded-xl">School Login</button>
-              <button onClick={() => { openAuth('student'); setIsMenuOpen(false); }} className="w-full bg-primary text-white py-3 rounded-xl font-medium shadow-lg shadow-primary/20">Student Access</button>
-            </div>
-          </div>
-        )}
-      </nav>
+      <Navbar onNavigate={navigateTo} onAuth={openAuth} />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden relative">
@@ -409,8 +367,8 @@ export default function Home() {
           <div className="absolute w-[600px] h-[600px] bg-secondary/20 rounded-full blur-[100px] bottom-0 left-0"></div>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div className="max-w-2xl">
+          <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-6">
+            <div className="max-w-2xl text-center md:text-left">
               <h2 className="text-3xl lg:text-4xl font-bold mb-4">Why Schools Choose Pathlight</h2>
               <p className="text-slate-400 text-lg">We designed our platform to solve the most pressing challenges in student mental health today.</p>
             </div>
@@ -515,59 +473,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-            <div className="col-span-1 md:col-span-1">
-              <div className="flex items-center gap-2 mb-6">
-                <div className="text-primary">
-                  <Logo className="w-6 h-6" />
-                </div>
-              </div>
-              <p className="text-sm leading-relaxed mb-6">Empowering the next generation with accessible, safe, and intelligent mental health support.</p>
-              <div className="flex gap-4">
-                <Globe size={20} className="hover:text-white cursor-pointer" />
-                <Users size={20} className="hover:text-white cursor-pointer" />
-              </div>
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-6">Platform</h4>
-              <ul className="space-y-3 text-sm">
-                <li><button onClick={() => navigateTo('#features')} className="hover:text-primary transition-colors text-left">Live Avatar</button></li>
-                <li><button onClick={() => navigateTo('#compliance')} className="hover:text-primary transition-colors text-left">Safety Protocols</button></li>
-                <li><button onClick={() => navigateTo('#schools')} className="hover:text-primary transition-colors text-left">School Dashboard</button></li>
-                <li><button onClick={() => navigateTo('Integration API')} className="hover:text-primary transition-colors text-left">Integration API</button></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-6">Resources</h4>
-              <ul className="space-y-3 text-sm">
-                <li><button onClick={() => navigateTo('Crisis Hotlines')} className="hover:text-primary transition-colors text-left">Crisis Hotlines</button></li>
-                <li><button onClick={() => navigateTo('Counselor Training')} className="hover:text-primary transition-colors text-left">Counselor Training</button></li>
-                <li><button onClick={() => navigateTo('Case Studies')} className="hover:text-primary transition-colors text-left">Case Studies</button></li>
-                <li><button onClick={() => navigateTo('Help Center')} className="hover:text-primary transition-colors text-left">Help Center</button></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-6">Company</h4>
-              <ul className="space-y-3 text-sm">
-                <li><button onClick={() => navigateTo('About Us')} className="hover:text-primary transition-colors text-left">About Us</button></li>
-                <li><button onClick={() => navigateTo('Careers')} className="hover:text-primary transition-colors text-left">Careers</button></li>
-                <li><button onClick={() => navigateTo('Contact')} className="hover:text-primary transition-colors text-left">Contact</button></li>
-                <li><button onClick={() => navigateTo('privacy')} className="hover:text-primary transition-colors text-left">Privacy Policy</button></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
-            <p>&copy; 2024 Pathlight AI Inc. All rights reserved.</p>
-            <div className="flex gap-6">
-              <button onClick={() => navigateTo('terms')} className="hover:text-white">Terms</button>
-              <button onClick={() => navigateTo('privacy')} className="hover:text-white">Privacy</button>
-              <button onClick={() => navigateTo('Cookies')} className="hover:text-white">Cookies</button>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer onNavigate={navigateTo} />
 
       {/* Auth Modal */}
       {/* Auth Modal Removed */}

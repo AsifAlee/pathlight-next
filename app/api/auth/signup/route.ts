@@ -10,8 +10,11 @@ export async function POST(request: NextRequest) {
 
         const { name, email, password, role } = await request.json();
 
-        // Check if user already exists
-        const existingUser = await User.findOne({ email });
+        // Normalize email to lowercase
+        const normalizedEmail = email.toLowerCase();
+
+        // Check if user already exists (case-insensitive)
+        const existingUser = await User.findOne({ email: normalizedEmail });
         if (existingUser) {
             return NextResponse.json(
                 { message: 'User already exists' },
@@ -26,7 +29,7 @@ export async function POST(request: NextRequest) {
         // Create new user
         const user = await User.create({
             name,
-            email,
+            email: normalizedEmail,
             password: hashedPassword,
             role: role || 'student'
         });
