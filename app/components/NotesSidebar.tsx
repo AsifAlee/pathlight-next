@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Notebook, X, Send, Image as ImageIcon, FileText, Paperclip } from "lucide-react";
+import { Notebook, X, Send, Image as ImageIcon, FileText, Paperclip, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 interface Note {
@@ -85,6 +85,12 @@ export default function NotesSidebar({ show, onClose }: NotesSidebarProps) {
         const file = e.target.files?.[0];
         if (!file) return;
 
+        if (file.size > 6 * 1024 * 1024) {
+            toast.error("File size must be less than 6MB");
+            e.target.value = '';
+            return;
+        }
+
         const userStr = localStorage.getItem("user");
         if (!userStr) return;
         const user = JSON.parse(userStr);
@@ -120,6 +126,12 @@ export default function NotesSidebar({ show, onClose }: NotesSidebarProps) {
         const file = e.target.files?.[0];
         if (!file) return;
 
+        if (file.size > 6 * 1024 * 1024) {
+            toast.error("Image size must be less than 6MB");
+            e.target.value = '';
+            return;
+        }
+
         const userStr = localStorage.getItem("user");
         if (!userStr) return;
         const user = JSON.parse(userStr);
@@ -149,6 +161,25 @@ export default function NotesSidebar({ show, onClose }: NotesSidebarProps) {
             toast.error("Error uploading image", { id: toastId });
         }
         e.target.value = ''; // Reset input
+    };
+
+    const handleDeleteNote = async (id: string) => {
+        if (!confirm("Are you sure you want to delete this note?")) return;
+
+        try {
+            const res = await fetch(`/api/notes?id=${id}`, {
+                method: "DELETE"
+            });
+
+            if (res.ok) {
+                setNotes(prev => prev.filter(n => (n._id || n.id) !== id));
+                toast.success("Note deleted");
+            } else {
+                toast.error("Failed to delete note");
+            }
+        } catch (error) {
+            toast.error("Error deleting note");
+        }
     };
 
     return (
@@ -206,9 +237,18 @@ export default function NotesSidebar({ show, onClose }: NotesSidebarProps) {
                                 </a>
                             )}
 
-                            <p className="text-[10px] text-slate-400 mt-2 text-right">
-                                {new Date(note.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                            </p>
+                            <div className="flex justify-between items-end mt-2">
+                                <p className="text-[10px] text-slate-400">
+                                    {new Date(note.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                </p>
+                                <button
+                                    onClick={() => handleDeleteNote(note._id || note.id || '')}
+                                    className="text-slate-400 hover:text-red-500 transition-colors p-1"
+                                    title="Delete note"
+                                >
+                                    <Trash2 size={14} />
+                                </button>
+                            </div>
                         </div>
                     ))
                 )}

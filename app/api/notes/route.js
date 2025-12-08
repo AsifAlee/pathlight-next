@@ -55,6 +55,10 @@ export async function POST(req) {
                 return NextResponse.json({ error: "No file provided" }, { status: 400 });
             }
 
+            if (file.size > 6 * 1024 * 1024) {
+                return NextResponse.json({ error: "File size must be less than 6MB" }, { status: 400 });
+            }
+
             // Convert file to buffer for Cloudinary
             const arrayBuffer = await file.arrayBuffer();
             const buffer = Buffer.from(arrayBuffer);
@@ -64,7 +68,8 @@ export async function POST(req) {
                 cloudinary.uploader.upload_stream(
                     {
                         resource_type: "auto",
-                        folder: "counseling_notes"
+                        folder: "counseling_notes",
+                        resource_type: "auto"
                     },
                     (error, result) => {
                         if (error) reject(error);
@@ -83,5 +88,32 @@ export async function POST(req) {
     } catch (error) {
         console.error("Error creating note:", error);
         return NextResponse.json({ error: "Failed to create note" }, { status: 500 });
+    }
+}
+
+export async function DELETE(req) {
+    await dbConnect();
+
+    try {
+        const { searchParams } = new URL(req.url);
+        const id = searchParams.get('id');
+
+        if (!id) {
+            return NextResponse.json({ error: "Note ID required" }, { status: 400 });
+        }
+
+        // Ideally we should verify ownership here if we had session context easily available in API
+        // For now relying on client providing ID. In prod, validate userId matches.
+
+        const deletedNote = await Note.findByIdAndDelete(id);
+
+        if (!deletedNote) {
+            return NextResponse.json({ error: "Note not found" }, { status: 404 });
+        }
+
+        return NextResponse.json({ message: "Note deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting note:", error);
+        return NextResponse.json({ error: "Failed to delete note" }, { status: 500 });
     }
 }
