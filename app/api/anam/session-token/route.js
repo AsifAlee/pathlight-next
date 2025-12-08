@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export async function POST(request: NextRequest) {
+export async function POST(request) {
     try {
         // Get the authorization header
         const authHeader = request.headers.get('authorization');
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
         const data = await response.json();
         return NextResponse.json({ sessionToken: data.sessionToken });
 
-    } catch (error: any) {
+    } catch (error) {
         console.error('Session token creation error:', error);
         return NextResponse.json(
             { message: 'Server Error', error: error.message },

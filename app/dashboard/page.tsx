@@ -7,11 +7,17 @@ import toast from "react-hot-toast";
 import { LogOut, User, Video, Settings, History } from "lucide-react";
 import VideoCallInterface from "../components/VideoCallInterface";
 
+import {
+    Notebook
+} from 'lucide-react';
+import NotesSidebar from "../components/NotesSidebar";
+
 export default function Dashboard() {
     const router = useRouter();
     const [user, setUser] = useState<{ name: string; email: string; role: string } | null>(null);
     const [loading, setLoading] = useState(true);
     const [callActive, setCallActive] = useState(false);
+    const [showNotes, setShowNotes] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -179,7 +185,20 @@ export default function Dashboard() {
                             <VideoCallInterface onEndCall={endCall} />
                         </div>
                     )}
+
+
+
+
                 </div>
+
+                <NotesSidebar show={showNotes} onClose={() => setShowNotes(false)} />
+                <button
+                    onClick={() => setShowNotes(true)}
+                    className="fixed bottom-8 right-8 w-16 h-16 bg-orange-600 text-white rounded-full shadow-xl hover:bg-orange-700 hover:scale-110 transition-all z-40 flex items-center justify-center font-bold"
+                    title="Open Notes"
+                >
+                    <Notebook size={24} />
+                </button>
             </main>
         </div>
     );

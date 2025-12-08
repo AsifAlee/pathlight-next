@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type Role = 'student' | 'school' | 'guest';
+export type Role = 'student' | 'school' | 'guest' | 'user';
 
 export interface Message {
   id: string;

@@ -158,8 +158,8 @@ function SignUpContent() {
 
                         <div className="pt-2">
                             <button
-                                disabled={loading}
-                                className="w-full bg-slate-900 text-white py-4 rounded-xl font-bold text-lg hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                                // disabled={loading}
+                                disabled={true} className="w-full bg-slate-900 text-white py-4 rounded-xl font-bold text-lg hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                             >
                                 {loading ? 'Creating Account...' : (
                                     <>Create Account <ArrowRight size={20} /></>
