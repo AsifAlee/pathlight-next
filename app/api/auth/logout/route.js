@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export async function POST(request: NextRequest) {
+export async function POST(request) {
     try {
         // In a stateless JWT setup, logout is primarily handled client-side
         // by removing the token from localStorage/cookies
@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
             message: 'Logged out successfully'
         }, { status: 200 });
 
-    } catch (error: any) {
+    } catch (error) {
         console.error('Logout error:', error);
         return NextResponse.json(
             { message: 'Server Error', error: error.message },

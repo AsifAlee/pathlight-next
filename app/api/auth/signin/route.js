@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import jwt, { SignOptions } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import dbConnect from '@/lib/dbConnect';
 import User from '@/models/User';
 
-export async function POST(request: NextRequest) {
+export async function POST(request) {
     try {
         await dbConnect();
 
@@ -37,13 +37,13 @@ export async function POST(request: NextRequest) {
         };
 
         // Sign token
-        const options: SignOptions = {
-            expiresIn: (process.env.JWT_EXPIRY || '7d') as any
+        const options = {
+            expiresIn: process.env.JWT_EXPIRY || '7d'
         };
 
         const token = jwt.sign(
             payload,
-            process.env.JWT_SECRET!,
+            process.env.JWT_SECRET,
             options
         );
 
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
             }
         });
 
-    } catch (error: any) {
+    } catch (error) {
         console.error('Signin error:', error);
         return NextResponse.json(
             { message: 'Server Error', error: error.message },
