@@ -20,7 +20,7 @@ import { Role } from "@/types";
 const AVATARS = [
   {
     id: 1,
-    name: "David",
+    name: "Matthew McConaughey",
     role: "The Visionary Philanthropist",
     image: "/p1.jpeg",
     desc: "Focuses on global impact, strategic thinking, and finding solutions to complex world problems.",
