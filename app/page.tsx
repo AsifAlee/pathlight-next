@@ -20,9 +20,9 @@ import { Role } from "@/types";
 const AVATARS = [
   {
     id: 1,
-    name: "Bill Gates",
+    name: "David",
     role: "The Visionary Philanthropist",
-    image: "/bill-gates.jpg",
+    image: "/p1.jpeg",
     desc: "Focuses on global impact, strategic thinking, and finding solutions to complex world problems.",
     color: "bg-orange-500"
   },
