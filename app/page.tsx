@@ -20,37 +20,34 @@ import { Role } from "@/types";
 const AVATARS = [
   {
     id: 1,
-    name: "Sarah",
-    role: "The Empathetic Listener",
-    // image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    desc: "Specializes in anxiety and social stress.",
-    color: "bg-orange-500",
-    image: "https://cdn.sanity.io/images/q8popn1e/production/3f1a685ac54d1c1dd8a9cecc575176accd605741-3624x2838.png?auto=format&q=75&url=https://cdn.sanity.io/images/q8popn1e/production/3f1a685ac54d1c1dd8a9cecc575176accd605741-3624x2838.png&w=2000"
+    name: "Bill Gates",
+    role: "The Visionary Philanthropist",
+    image: "/bill-gates.jpg",
+    desc: "Focuses on global impact, strategic thinking, and finding solutions to complex world problems.",
+    color: "bg-orange-500"
   },
   {
     id: 2,
-    name: "David",
-    role: "The Academic Coach",
-    // image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    desc: "Helps with time management and burnout.",
-    color: "bg-amber-600",
-    image: "https://cdn.sanity.io/images/q8popn1e/production/e45293e3e1b579af12fe688da5b40d2b65ad33bd-3616x2838.png?auto=format&q=75&url=https://cdn.sanity.io/images/q8popn1e/production/e45293e3e1b579af12fe688da5b40d2b65ad33bd-3616x2838.png&w=2000"
+    name: "Elon Musk",
+    role: "The Innovation Catalyst",
+    image: "/elon.jpg",
+    desc: "Focuses on disruptive technology, future-building, and pushing the boundaries of what's possible.",
+    color: "bg-amber-600"
   },
   {
     id: 3,
-    name: "Maya",
-    role: "The Wellness Mentor",
-    // image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    desc: "Focuses on mindfulness and emotional regulation.",
-    color: "bg-yellow-500",
-    image: 'https://cdn.sanity.io/images/q8popn1e/production/06e52173c5feeff269d7a1f7ff6f98e65aadc187-3616x2832.png?auto=format&q=75&url=https://cdn.sanity.io/images/q8popn1e/production/06e52173c5feeff269d7a1f7ff6f98e65aadc187-3616x2832.png&w=2000'
+    name: "J.K. Rowling",
+    role: "The Creative Storyteller",
+    image: "/jk-rowling.jpg",
+    desc: "Focuses on narrative, imagination, and building resilience through the power of story.",
+    color: "bg-yellow-500"
   },
   {
     id: 4,
-    name: "James",
-    role: "The Career Guide",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    desc: "Assists with future planning and motivation.",
+    name: "Jeff Bezos",
+    role: "The Customer Obsession Expert",
+    image: "/jeff-bezos.jpg",
+    desc: "Focuses on long-term thinking, operational excellence, and relentless innovation.",
     color: "bg-orange-600"
   }
 ];
