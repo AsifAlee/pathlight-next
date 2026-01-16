@@ -84,76 +84,76 @@ const InfoPage: React.FC<InfoPageProps> = ({ title, onBack }) => {
             </div>
           )
         };
-        case 'Contact':
-            return {
-              icon: <School className="w-12 h-12 text-blue-500" />,
-              content: (
-                <div className="space-y-6">
-                  <p>We'd love to hear from you. Reach out to our team for demos, support, or general inquiries.</p>
-                  <div className="space-y-2">
-                    <p><strong>General Inquiries:</strong> hello@pathlight.ai</p>
-                    <p><strong>Support:</strong> support@pathlight.ai</p>
-                    <p><strong>Sales:</strong> sales@pathlight.ai</p>
-                    <p><strong>Address:</strong> 123 Innovation Dr, San Francisco, CA 94105</p>
-                  </div>
-                </div>
-              )
-            };
-        case 'Counselor Training':
-            return {
-                icon: <Award className="w-12 h-12 text-orange-500" />,
-                content: (
-                    <div className="space-y-4">
-                        <p>We provide comprehensive training for school counselors to effectively utilize Pathlight's data insights.</p>
-                        <p>Our 4-week certification program covers:</p>
-                        <ul className="list-disc pl-5">
-                            <li>Dashboard Analytics Mastery</li>
-                            <li>Digital Intervention Strategies</li>
-                            <li>Ethical AI Usage in Schools</li>
-                        </ul>
-                    </div>
-                )
-            };
-        case 'Case Studies':
-            return {
-                icon: <FileText className="w-12 h-12 text-green-500" />,
-                content: (
-                    <div className="space-y-4">
-                        <h3 className="font-bold">Riverdale High School</h3>
-                        <p>Reduced counselor administrative load by 40% in the first semester.</p>
-                        <h3 className="font-bold mt-4">Oakwood Academy</h3>
-                        <p>Identified and intervened in 15 critical mental health cases early using Pathlight's sentiment analysis.</p>
-                    </div>
-                )
-            };
-        case 'Help Center':
-            return {
-                icon: <Heart className="w-12 h-12 text-pink-500" />,
-                content: (
-                    <div className="space-y-4">
-                        <p>Browse our guides and FAQs.</p>
-                        <div className="space-y-2">
-                            <details className="bg-white p-4 rounded border">
-                                <summary className="font-semibold cursor-pointer">How do I reset my password?</summary>
-                                <p className="mt-2 text-sm text-slate-600">Click 'Forgot Password' on the login screen or contact your school admin.</p>
-                            </details>
-                            <details className="bg-white p-4 rounded border">
-                                <summary className="font-semibold cursor-pointer">Is my chat private?</summary>
-                                <p className="mt-2 text-sm text-slate-600">Yes, chats are anonymous unless a severe safety risk is detected.</p>
-                            </details>
-                        </div>
-                    </div>
-                )
-            };
-        case 'Cookies':
-            return {
-                icon: <Globe className="w-12 h-12 text-slate-500" />,
-                content: (
-                    <div className="space-y-4">
-                        <p>We use essential cookies to keep you logged in and secure. We do not use advertising cookies or track you across other sites.</p>
-                    </div>
-                )
-            };
+      case 'Contact':
+        return {
+          icon: <School className="w-12 h-12 text-blue-500" />,
+          content: (
+            <div className="space-y-6">
+              <p>We'd love to hear from you. Reach out to our team for demos, support, or general inquiries.</p>
+              <div className="space-y-2">
+                <p><strong>General Inquiries:</strong> hello@pathlight.ai</p>
+                <p><strong>Support:</strong> support@pathlight.ai</p>
+                <p><strong>Sales:</strong> sales@pathlight.ai</p>
+                <p><strong>Address:</strong> 123 Innovation Dr, San Francisco, CA 94105</p>
+              </div>
+            </div>
+          )
+        };
+      case 'Counselor Training':
+        return {
+          icon: <Award className="w-12 h-12 text-orange-500" />,
+          content: (
+            <div className="space-y-4">
+              <p>We provide comprehensive training for school counselors to effectively utilize Pathlight's data insights.</p>
+              <p>Our 4-week certification program covers:</p>
+              <ul className="list-disc pl-5">
+                <li>Dashboard Analytics Mastery</li>
+                <li>Digital Intervention Strategies</li>
+                <li>Ethical AI Usage in Schools</li>
+              </ul>
+            </div>
+          )
+        };
+      case 'Case Studies':
+        return {
+          icon: <FileText className="w-12 h-12 text-green-500" />,
+          content: (
+            <div className="space-y-4">
+              <h3 className="font-bold">Riverdale High School</h3>
+              <p>Reduced counselor administrative load by 40% in the first semester.</p>
+              <h3 className="font-bold mt-4">Oakwood Academy</h3>
+              <p>Identified and intervened in 15 critical mental health cases early using Pathlight's sentiment analysis.</p>
+            </div>
+          )
+        };
+      case 'Help Center':
+        return {
+          icon: <Heart className="w-12 h-12 text-pink-500" />,
+          content: (
+            <div className="space-y-4">
+              <p>Browse our ICONS and FAQs.</p>
+              <div className="space-y-2">
+                <details className="bg-white p-4 rounded border">
+                  <summary className="font-semibold cursor-pointer">How do I reset my password?</summary>
+                  <p className="mt-2 text-sm text-slate-600">Click 'Forgot Password' on the login screen or contact your school admin.</p>
+                </details>
+                <details className="bg-white p-4 rounded border">
+                  <summary className="font-semibold cursor-pointer">Is my chat private?</summary>
+                  <p className="mt-2 text-sm text-slate-600">Yes, chats are anonymous unless a severe safety risk is detected.</p>
+                </details>
+              </div>
+            </div>
+          )
+        };
+      case 'Cookies':
+        return {
+          icon: <Globe className="w-12 h-12 text-slate-500" />,
+          content: (
+            <div className="space-y-4">
+              <p>We use essential cookies to keep you logged in and secure. We do not use advertising cookies or track you across other sites.</p>
+            </div>
+          )
+        };
       default:
         return {
           icon: <Shield className="w-12 h-12 text-slate-400" />,
@@ -170,11 +170,11 @@ const InfoPage: React.FC<InfoPageProps> = ({ title, onBack }) => {
         <div className="max-w-4xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2 cursor-pointer" onClick={onBack}>
             <div className="text-primary">
-                <Logo className="w-6 h-6" />
+              <Logo className="w-6 h-6" />
             </div>
             <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700">Pathlight</span>
           </div>
-          <button 
+          <button
             onClick={onBack}
             className="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-primary transition-colors"
           >

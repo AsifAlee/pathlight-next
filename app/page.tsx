@@ -155,10 +155,10 @@ export default function Home() {
               </div>
               <h1 className="text-5xl lg:text-7xl font-bold tracking-tight text-slate-900 leading-[1.1]">
                 The World's First <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">AI Career Counselor.</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">AI Career ICON.</span>
               </h1>
               <p className="text-lg text-slate-600 leading-relaxed max-w-xl">
-                Experience the future of mental health and career support. Choose a guide that resonates with you and get real-time, judgment-free support for school, stress, and life.
+                Experience the future of mental health and career support. Choose an ICON that resonates with you and get real-time, judgment-free support for school, stress, and life.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button onClick={() => openAuth('student', 'signup')} className="bg-primary text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-orange-600 transition-all shadow-xl shadow-primary/30 flex items-center justify-center gap-2 group">
@@ -171,7 +171,7 @@ export default function Home() {
 
 
               <div className="pt-6">
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Select your guide to preview</p>
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Select your ICON to preview</p>
                 <div className="flex gap-3">
                   {AVATARS.map((avatar) => (
                     <button
@@ -214,7 +214,7 @@ export default function Home() {
                         <div className="absolute bottom-0 left-0 w-full h-[3px] bg-primary"></div>
                       </div>
                       <div className="px-3 py-1.5 bg-slate-900/90 backdrop-blur-md flex items-center border-l border-white/5">
-                        <span className="text-sm font-bold text-white tracking-wide">AI Counselor</span>
+                        <span className="text-sm font-bold text-white tracking-wide">AI ICON</span>
                       </div>
                     </div>
                   </div>
@@ -269,7 +269,7 @@ export default function Home() {
       <section id="guides" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Diverse Voices for Diverse Needs</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Meet Your ICONS</h2>
             <p className="text-slate-600 text-lg">Mental health isn't one-size-fits-all. Our platform offers a range of AI personalities modeled after real counseling styles.</p>
           </div>
 

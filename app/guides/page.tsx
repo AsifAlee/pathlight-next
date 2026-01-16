@@ -118,7 +118,7 @@ export default function GuidesPage() {
                             <ArrowLeft size={24} />
                         </button>
                         <div>
-                            <h1 className="text-4xl font-bold text-slate-900">Our AI Guides</h1>
+                            <h1 className="text-4xl font-bold text-slate-900">Our AI ICONS</h1>
                             <p className="text-slate-600">Choose the perfect mentor for your journey.</p>
                         </div>
                     </div>
@@ -169,7 +169,7 @@ export default function GuidesPage() {
                                                     <div className="absolute bottom-0 left-0 w-full h-[3px] bg-primary"></div>
                                                 </div>
                                                 <div className="px-3 py-1.5 bg-slate-900/90 backdrop-blur-md flex items-center border-l border-white/5">
-                                                    <span className="text-sm font-bold text-white tracking-wide">AI Counselor</span>
+                                                    <span className="text-sm font-bold text-white tracking-wide">AI ICON</span>
                                                 </div>
                                             </div>
                                         </div>

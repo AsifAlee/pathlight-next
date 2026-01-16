@@ -25,7 +25,7 @@ export default function Navbar({ onNavigate, onAuth }: NavbarProps) {
                     <div className="hidden lg:flex items-center gap-8">
                         <button onClick={() => onNavigate('#features')} className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Features</button>
                         <button onClick={() => onNavigate('#how-it-works')} className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">How it Works</button>
-                        <button onClick={() => onNavigate('guides')} className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Our Guides</button>
+                        <button onClick={() => onNavigate('guides')} className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Our ICONS</button>
                         <div className="flex items-center gap-3 pl-4 border-l border-slate-200">
                             <button onClick={() => onAuth('school')} className="text-sm font-medium text-slate-600 hover:text-primary px-3 py-2">School Portal</button>
                             <button onClick={() => onAuth('student')} className="bg-slate-900 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-slate-800 transition-all shadow-md hover:shadow-lg">
@@ -47,7 +47,7 @@ export default function Navbar({ onNavigate, onAuth }: NavbarProps) {
                 <div className="lg:hidden bg-white border-b border-orange-100 p-4 space-y-4 shadow-xl absolute w-full top-20 left-0 z-40">
                     <button onClick={() => { onNavigate('#features'); setIsMenuOpen(false); }} className="block w-full text-left text-slate-600 font-medium py-2">Features</button>
                     <button onClick={() => { onNavigate('#how-it-works'); setIsMenuOpen(false); }} className="block w-full text-left text-slate-600 font-medium py-2">How it Works</button>
-                    <button onClick={() => { onNavigate('guides'); setIsMenuOpen(false); }} className="block w-full text-left text-slate-600 font-medium py-2">Our Guides</button>
+                    <button onClick={() => { onNavigate('guides'); setIsMenuOpen(false); }} className="block w-full text-left text-slate-600 font-medium py-2">Our ICONS</button>
                     <div className="pt-4 border-t border-slate-100 flex flex-col gap-3">
                         <button onClick={() => { onAuth('school'); setIsMenuOpen(false); }} className="w-full text-center py-3 text-slate-600 font-medium bg-orange-50 rounded-xl">School Login</button>
                         <button onClick={() => { onAuth('student'); setIsMenuOpen(false); }} className="w-full bg-primary text-white py-3 rounded-xl font-medium shadow-lg shadow-primary/20">Student Access</button>

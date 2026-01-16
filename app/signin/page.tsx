@@ -182,7 +182,7 @@ function SignInContent() {
                         </div>
                         <h2 className="text-4xl font-bold leading-tight mb-6">
                             {userType === 'student'
-                                ? "Your personal guide to mental wellness."
+                                ? "Your personal ICON to mental wellness."
                                 : "Empower your school with data-driven insights."}
                         </h2>
                         <p className="text-white/80 text-lg leading-relaxed max-w-md">
