@@ -81,7 +81,9 @@ export default function Home() {
   };
 
   const navigateTo = (pageOrSection: string) => {
-    if (pageOrSection.startsWith('#')) {
+    if (pageOrSection === 'guides') {
+      router.push('/guides');
+    } else if (pageOrSection.startsWith('#')) {
       setActivePage('home');
       // Use setTimeout to allow render if coming from another page
       setTimeout(() => {
@@ -273,7 +275,7 @@ export default function Home() {
 
           <div className="md:p-0 p-8  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {AVATARS.map((avatar) => (
-              <div key={avatar.id} className="group relative rounded-3xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300 bg-slate-100" onClick={() => { setActiveAvatar(avatar); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+              <div key={avatar.id} className="group relative rounded-3xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300 bg-slate-100" onClick={() => router.push('/guides')}>
                 <div className="aspect-[3/4] overflow-hidden">
                   <img src={avatar.image} alt={avatar.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
@@ -282,7 +284,7 @@ export default function Home() {
                   <p className="text-white/80 text-sm font-medium mb-2">{avatar.role}</p>
                   <p className="text-white/60 text-xs line-clamp-2 mb-4">{avatar.desc}</p>
                   <div className="bg-white/20 backdrop-blur-md rounded-lg p-2 flex items-center justify-center text-white text-xs font-bold group-hover:bg-white group-hover:text-primary transition-colors">
-                    Select Guide
+                    Meet {avatar.name.split(' ')[0]}
                   </div>
                 </div>
               </div>
