@@ -10,6 +10,22 @@ import { ArrowLeft, Phone, Video, Mic } from "lucide-react";
 const AVATARS = [
     {
         id: 1,
+        name: "Tom Steyer",
+        role: "The Climate Crusader",
+        image: "/tom_seyer.jpeg",
+        desc: "Focuses on environmental sustainability, economic justice, and democratic engagement.",
+        color: "bg-green-600"
+    },
+    {
+        id: 2,
+        name: "Hilda Solis",
+        role: "The Community Champion",
+        image: "/hilda_solis.jpg",
+        desc: "Focuses on worker's rights, environmental justice, and community empowerment.",
+        color: "bg-blue-600"
+    },
+    {
+        id: 3,
         name: "Matthew McConaughey",
         role: "The Visionary Philanthropist",
         image: "/p1.jpeg",
@@ -17,7 +33,7 @@ const AVATARS = [
         color: "bg-orange-500"
     },
     {
-        id: 2,
+        id: 4,
         name: "Elon Musk",
         role: "The Innovation Catalyst",
         image: "/elon.jpg",
@@ -25,7 +41,7 @@ const AVATARS = [
         color: "bg-amber-600"
     },
     {
-        id: 3,
+        id: 5,
         name: "J.K. Rowling",
         role: "The Creative Storyteller",
         image: "/jk-rowling.jpg",
@@ -33,7 +49,7 @@ const AVATARS = [
         color: "bg-yellow-500"
     },
     {
-        id: 4,
+        id: 6,
         name: "Jeff Bezos",
         role: "The Customer Obsession Expert",
         image: "/jeff-bezos.jpg",
@@ -41,7 +57,7 @@ const AVATARS = [
         color: "bg-orange-600"
     },
     {
-        id: 5,
+        id: 7,
         name: "Naruto Uzumaki",
         role: "The Resilience Mentor",
         image: "/naruto_uzumaki.jpeg",
@@ -49,7 +65,7 @@ const AVATARS = [
         color: "bg-orange-400"
     },
     {
-        id: 6,
+        id: 8,
         name: "Monkey D. Luffy",
         role: "The Freedom Seeker",
         image: "/straw_hat_luffy.jpeg",
@@ -57,7 +73,7 @@ const AVATARS = [
         color: "bg-red-500"
     },
     {
-        id: 7,
+        id: 9,
         name: "Son Goku",
         role: "The Limit Breaker",
         image: "/sonuGoku.jpeg",
@@ -65,7 +81,7 @@ const AVATARS = [
         color: "bg-yellow-600"
     },
     {
-        id: 8,
+        id: 10,
         name: "Kakashi Hatake",
         role: "The Tactical Strategist",
         image: "/kakashi_hakate.jpeg",
@@ -73,7 +89,7 @@ const AVATARS = [
         color: "bg-blue-400"
     },
     {
-        id: 9,
+        id: 11,
         name: "Yami Yugi",
         role: "The Mental Fortitude Expert",
         image: "/yami_hugi.jpeg",
