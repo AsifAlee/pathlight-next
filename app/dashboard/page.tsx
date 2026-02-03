@@ -11,6 +11,7 @@ import {
     Notebook
 } from 'lucide-react';
 import NotesSidebar from "../components/NotesSidebar";
+import TavusVideoCallInterface from "../components/TavusVideoCallInterface";
 
 export default function Dashboard() {
     const router = useRouter();
@@ -18,6 +19,7 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(true);
     const [callActive, setCallActive] = useState(false);
     const [showNotes, setShowNotes] = useState(false);
+    const [useTavus, setUseTavus] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -92,6 +94,23 @@ export default function Dashboard() {
                         <Settings size={20} />
                         Settings
                     </a>
+                    <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-xl font-medium transition-colors">
+                        <Settings size={20} />
+                        Settings
+                    </a>
+
+                    {/* Dev Switch for Tavus */}
+                    <div className="px-4 mt-6 pt-6 border-t border-slate-100">
+                        <label className="flex items-center gap-3 cursor-pointer">
+                            <input
+                                type="checkbox"
+                                checked={useTavus}
+                                onChange={(e) => setUseTavus(e.target.checked)}
+                                className="w-5 h-5 rounded border-slate-300 text-orange-600 focus:ring-orange-500"
+                            />
+                            <span className="text-sm font-medium text-slate-600">Use Tavus (Beta)</span>
+                        </label>
+                    </div>
                 </nav>
 
                 <div className="absolute bottom-0 left-0 w-full p-4 border-t border-slate-100">
@@ -182,7 +201,11 @@ export default function Dashboard() {
                     ) : (
                         // Active call state
                         <div className="h-[calc(100vh-180px)]">
-                            <VideoCallInterface onEndCall={endCall} />
+                            {useTavus ? (
+                                <TavusVideoCallInterface />
+                            ) : (
+                                <VideoCallInterface onEndCall={endCall} />
+                            )}
                         </div>
                     )}
 
