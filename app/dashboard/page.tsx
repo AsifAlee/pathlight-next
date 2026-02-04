@@ -18,6 +18,44 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(true);
     const [callActive, setCallActive] = useState(false);
     const [showNotes, setShowNotes] = useState(false);
+    const [selectedPersona, setSelectedPersona] = useState<any>(null);
+
+    const PERSONAS = [
+        {
+            id: 'matthew',
+            name: 'Matthew McConaughey',
+            role: 'Motivational Coach',
+            image: '/counselor-avatar.jpg', // Using existing avatar as placeholder or upload new one
+            replicaId: "r92debe21318",
+            personaId: "p66ca14bd844",
+            enabled: true,
+            description: "Energetic and enthusiastic guidance to help you find your path!"
+        },
+        {
+            id: 'bill',
+            name: 'Bill Gates',
+            role: 'Tech & Innovation',
+            image: '/bill-gates.jpg',
+            enabled: false,
+            description: "Expert insights on technology and future trends. (Coming Soon)"
+        },
+        {
+            id: 'jeff',
+            name: 'Jeff Bezos',
+            role: 'Business Strategy',
+            image: '/jeff-bezos.jpg',
+            enabled: false,
+            description: "Mastering business scale and customer obsession. (Coming Soon)"
+        },
+        {
+            id: 'elon',
+            name: 'Elon Musk',
+            role: 'Visionary',
+            image: '/elon.jpg',
+            enabled: false,
+            description: "Thinking big and solving hard problems. (Coming Soon)"
+        }
+    ];
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -30,6 +68,8 @@ export default function Dashboard() {
 
         setUser(JSON.parse(userData));
         setLoading(false);
+        // Set default persona
+        setSelectedPersona(PERSONAS[0]);
     }, [router]);
 
     const handleLogout = async () => {
@@ -55,7 +95,10 @@ export default function Dashboard() {
         }
     };
 
-    const startCall = () => {
+    const startCall = (persona?: any) => {
+        if (persona) {
+            setSelectedPersona(persona);
+        }
         setCallActive(true);
     };
 
@@ -127,68 +170,109 @@ export default function Dashboard() {
                     {!callActive ? (
                         // Pre-call state
                         <div className="max-w-4xl mx-auto">
-                            <div className="text-center mb-8">
+                            <div className="text-center mb-10">
                                 <h2 className="text-3xl font-bold text-slate-900 mb-3">
                                     Welcome, {user?.name}! 👋
                                 </h2>
                                 <p className="text-slate-600 text-lg">
-                                    Your AI counselor is ready to support you. Start a session whenever you need to talk.
+                                    Choose your AI counselor and start a personalized session.
                                 </p>
                             </div>
 
-                            {/* Info Cards */}
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                                <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                                    <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-4">
-                                        <Video size={24} />
-                                    </div>
-                                    <h3 className="text-lg font-bold text-slate-900 mb-2">24/7 Available</h3>
-                                    <p className="text-slate-600 text-sm">Connect with your AI counselor anytime, day or night</p>
-                                </div>
+                            {/* Choose Counselor Section */}
+                            <div className="mb-12">
+                                <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                                    <User size={24} className="text-orange-500" />
+                                    Choose Your Counselor
+                                </h3>
 
-                                <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                                    <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center text-green-600 mb-4">
-                                        <User size={24} />
-                                    </div>
-                                    <h3 className="text-lg font-bold text-slate-900 mb-2">100% Private</h3>
-                                    <p className="text-slate-600 text-sm">Your conversations are completely confidential</p>
-                                </div>
-
-                                <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                                    <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 mb-4">
-                                        <Settings size={24} />
-                                    </div>
-                                    <h3 className="text-lg font-bold text-slate-900 mb-2">Personalized</h3>
-                                    <p className="text-slate-600 text-sm">Tailored support based on your unique needs</p>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                                    {PERSONAS.map((persona) => (
+                                        <button
+                                            key={persona.id}
+                                            disabled={!persona.enabled}
+                                            onClick={() => startCall(persona)}
+                                            className={`group relative rounded-2xl overflow-hidden transition-all duration-300 text-left ${persona.enabled
+                                                ? "hover:shadow-xl hover:-translate-y-1 ring-2 ring-transparent hover:ring-orange-500 cursor-pointer"
+                                                : "opacity-60 cursor-not-allowed grayscale"
+                                                } bg-white shadow-sm border border-slate-100`}
+                                        >
+                                            <div className="aspect-square relative overflow-hidden bg-slate-100">
+                                                <img
+                                                    src={persona.image}
+                                                    alt={persona.name}
+                                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                />
+                                                {!persona.enabled && (
+                                                    <div className="absolute inset-0 bg-slate-900/60 flex items-center justify-center">
+                                                        <span className="bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold border border-white/30">
+                                                            Coming Soon
+                                                        </span>
+                                                    </div>
+                                                )}
+                                                {persona.enabled && (
+                                                    <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                                        <span className="bg-orange-600 text-white px-4 py-2 rounded-full font-bold shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                                            Start Session
+                                                        </span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div className="p-4">
+                                                <h4 className="font-bold text-slate-900 mb-1">{persona.name}</h4>
+                                                <p className="text-xs text-orange-600 font-semibold mb-2 uppercase tracking-wider">{persona.role}</p>
+                                                <p className="text-xs text-slate-500 line-clamp-2">{persona.description}</p>
+                                            </div>
+                                        </button>
+                                    ))}
                                 </div>
                             </div>
 
-                            {/* Start Call Button */}
-                            <div className="bg-gradient-to-br from-orange-500 to-amber-600 rounded-3xl p-12 text-center text-white shadow-xl">
-                                <h3 className="text-2xl font-bold mb-4">Ready to talk?</h3>
-                                <p className="text-white/90 mb-8 max-w-md mx-auto">
-                                    Click the button below to start a video session with your AI counselor.
-                                    Make sure your microphone is enabled.
-                                </p>
-                                <button
-                                    onClick={startCall}
-                                    className="px-8 py-4 bg-white text-orange-600 rounded-xl font-bold text-lg hover:bg-orange-50 transition-all shadow-lg hover:shadow-xl active:scale-95 inline-flex items-center gap-3"
-                                >
-                                    <Video size={24} />
-                                    Start Session
-                                </button>
+                            {/* Info Section (moved down or condensed if needed, keeping similar layout) */}
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-start gap-4">
+                                    <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 shrink-0">
+                                        <Video size={20} />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-bold text-slate-900 mb-1">24/7 Available</h3>
+                                        <p className="text-slate-600 text-xs text-balance">Connect with your AI counselor anytime, day or night</p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-start gap-4">
+                                    <div className="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center text-green-600 shrink-0">
+                                        <User size={20} />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-bold text-slate-900 mb-1">100% Private</h3>
+                                        <p className="text-slate-600 text-xs text-balance">Your conversations are completely confidential</p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-start gap-4">
+                                    <div className="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 shrink-0">
+                                        <Settings size={20} />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-bold text-slate-900 mb-1">Personalized</h3>
+                                        <p className="text-slate-600 text-xs text-balance">Tailored support based on your unique needs</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ) : (
                         // Active call state
                         <div className="h-[calc(100vh-180px)]">
-                            <VideoCallInterface onEndCall={endCall} />
+                            <VideoCallInterface
+                                onEndCall={endCall}
+                                personaConfig={selectedPersona ? {
+                                    replicaId: selectedPersona.replicaId,
+                                    personaId: selectedPersona.personaId
+                                } : undefined}
+                            />
                         </div>
                     )}
-
-
-
-
                 </div>
 
                 <NotesSidebar show={showNotes} onClose={() => setShowNotes(false)} />

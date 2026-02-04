@@ -7,6 +7,10 @@ import NotesSidebar from "./NotesSidebar";
 
 interface VideoCallInterfaceProps {
     onEndCall: () => void;
+    personaConfig?: {
+        replicaId: string;
+        personaId: string;
+    };
 }
 
 interface Message {
@@ -15,7 +19,7 @@ interface Message {
     timestamp: Date;
 }
 
-export default function VideoCallInterface({ onEndCall }: VideoCallInterfaceProps) {
+export default function VideoCallInterface({ onEndCall, personaConfig }: VideoCallInterfaceProps) {
     const [connecting, setConnecting] = useState(true);
     const [connected, setConnected] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -45,6 +49,7 @@ export default function VideoCallInterface({ onEndCall }: VideoCallInterfaceProp
     }, []);
 
     const startCall = async () => {
+        debugger
         try {
             setConnecting(true);
             setError(null);
@@ -66,7 +71,8 @@ export default function VideoCallInterface({ onEndCall }: VideoCallInterfaceProp
                         email: user.email || "",
                         careerGoals: "Exploring career options",
                         experienceLevel: "student"
-                    }
+                    },
+                    personaConfig
                 })
             });
 
