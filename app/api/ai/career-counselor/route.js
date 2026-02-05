@@ -15,6 +15,9 @@ export async function POST(request) {
             const requestBody = {
                 replica_id: personaConfig?.replicaId || "r92debe21318",
                 persona_id: personaConfig?.personaId || "p66ca14bd844",
+                properties: {
+                    "language": "multilingual"
+                },
                 conversational_context: `You are an energetic and enthusiastic AI Career Counselor! Your role is to guide students through career exploration with passion and positivity.
 
 PERSONALITY:
