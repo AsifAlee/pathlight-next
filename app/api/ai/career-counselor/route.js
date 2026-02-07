@@ -4,6 +4,8 @@ const TAVUS_API_KEY = 'fdcc5e2bfe2b4d82b9f63b19b739339c';
 const TAVUS_API_BASE = 'https://tavusapi.com';
 
 export async function POST(request) {
+    // Tavus API implementation commented out as requested
+    /*
     try {
         const { action, userInfo, personaConfig } = await request.json();
 
@@ -108,6 +110,8 @@ START WITH: A warm, energetic greeting and ask about their current interests or 
             message: 'Connected to local counselor'
         });
     }
+    */
+    return NextResponse.json({ message: "Tavus API is currently disabled." });
 }
 
 function generateCareerResponse(userMessage) {

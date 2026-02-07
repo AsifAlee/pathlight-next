@@ -7,6 +7,7 @@ import { Logo } from "../components/Logo";
 import toast from "react-hot-toast";
 import { LogOut, User, Video, Settings, History } from "lucide-react";
 import VideoCallInterface from "../components/VideoCallInterface";
+import AnamVideoCallInterface from "../components/AnamVideoCallInterface";
 
 import {
     Notebook
@@ -31,6 +32,14 @@ export default function Dashboard() {
             personaId: "p66ca14bd844",
             enabled: true,
             description: "Energetic and enthusiastic guidance to help you find your path!"
+        },
+        {
+            id: 'hilda',
+            name: 'Hilda Solis',
+            role: 'Community Champion',
+            image: '/hilda_solis.jpg',
+            enabled: false,
+            description: "Focuses on worker's rights, environmental justice, and community empowerment. (Coming Soon)"
         },
         {
             id: 'bill',
@@ -269,10 +278,9 @@ export default function Dashboard() {
                     ) : (
                         // Active call state
                         <div className="h-[calc(100vh-180px)]">
-                            <VideoCallInterface
+                            <AnamVideoCallInterface
                                 onEndCall={endCall}
                                 personaConfig={selectedPersona ? {
-                                    replicaId: selectedPersona.replicaId,
                                     personaId: selectedPersona.personaId
                                 } : undefined}
                             />
