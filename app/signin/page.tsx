@@ -44,8 +44,8 @@ function SignInContent() {
 
             toast.success("Successfully signed in!");
 
-            // Redirect to dashboard
-            router.push('/dashboard');
+            // Redirect to home page
+            router.push('/');
 
         } catch (err: any) {
             setError(err.message);
