@@ -112,7 +112,7 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig }: Ana
             };
             setMessages([greeting]);
 
-            toast.success("Connected to Anam session! 🎥");
+            toast.success("Connected to session! 🎥");
 
         } catch (err: any) {
             console.error("Failed to start Anam call:", err);
@@ -209,7 +209,7 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig }: Ana
                 {connecting && (
                     <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-slate-900/95 z-20">
                         <Loader2 className="w-16 h-16 text-orange-500 animate-spin" />
-                        <p className="text-white text-xl font-bold">Connecting to Anam Counselor...</p>
+                        <p className="text-white text-xl font-bold">Connecting to your Counselor...</p>
                     </div>
                 )}
 
@@ -296,7 +296,7 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig }: Ana
                 {/* Status Indicator */}
                 <div className="absolute top-6 left-6 flex items-center gap-2 bg-slate-900/70 backdrop-blur-md px-4 py-2 rounded-full pointer-events-none">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-white text-sm font-medium">Anam Live Session</span>
+                    <span className="text-white text-sm font-medium">Live Session</span>
                 </div>
             </div>
 
