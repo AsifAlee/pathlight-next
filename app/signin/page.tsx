@@ -6,8 +6,11 @@ import { useSearchParams, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { Logo } from "../components/Logo";
 import { ArrowRight, Mail, Lock, School, User, CheckCircle, Eye, EyeOff } from "lucide-react";
+import { useTranslation } from 'react-i18next';
+import '../i18n';
 
 function SignInContent() {
+    const { t } = useTranslation();
     const searchParams = useSearchParams();
     const router = useRouter();
     const initialType = searchParams.get('type') === 'school' ? 'school' : 'student';
@@ -68,8 +71,8 @@ function SignInContent() {
                         <Link href="/" className="inline-flex items-center gap-2 text-orange-600 mb-6 hover:opacity-80 transition-opacity">
                             <Logo className="w-32 h-32" />
                         </Link>
-                        <h1 className="text-3xl font-bold text-slate-900 mb-2">Welcome back</h1>
-                        <p className="text-slate-500">Please enter your details to sign in.</p>
+                        <h1 className="text-3xl font-bold text-slate-900 mb-2">{t('auth.welcome_back')}</h1>
+                        <p className="text-slate-500">{t('auth.enter_details')}</p>
                     </div>
 
                     {/* User Type Toggle */}
@@ -82,7 +85,7 @@ function SignInContent() {
                                 }`}
                         >
                             <User size={18} />
-                            Student
+                            {t('auth.student')}
                         </button>
                         <button
                             onClick={() => setUserType('school')}
@@ -92,7 +95,7 @@ function SignInContent() {
                                 }`}
                         >
                             <School size={18} />
-                            School Admin
+                            {t('auth.school_admin')}
                         </button>
                     </div>
 
@@ -104,7 +107,7 @@ function SignInContent() {
 
                     <form className="space-y-5" onSubmit={handleSignIn}>
                         <div className="space-y-1.5">
-                            <label className="text-sm font-semibold text-slate-700">Email</label>
+                            <label className="text-sm font-semibold text-slate-700">{t('auth.email')}</label>
                             <div className="relative">
                                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
                                 <input
@@ -119,7 +122,7 @@ function SignInContent() {
                         </div>
 
                         <div className="space-y-1.5">
-                            <label className="text-sm font-semibold text-slate-700">Password</label>
+                            <label className="text-sm font-semibold text-slate-700">{t('auth.password')}</label>
                             <div className="relative">
                                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
                                 <input
@@ -143,25 +146,25 @@ function SignInContent() {
                         <div className="flex items-center justify-between text-sm">
                             <label className="flex items-center gap-2 cursor-pointer">
                                 <input type="checkbox" className="w-4 h-4 rounded border-slate-300 text-orange-600 focus:ring-orange-500" />
-                                <span className="text-slate-600">Remember me</span>
+                                <span className="text-slate-600">{t('auth.remember_me')}</span>
                             </label>
-                            <a href="#" className="text-orange-600 font-medium hover:text-orange-700">Forgot password?</a>
+                            <a href="#" className="text-orange-600 font-medium hover:text-orange-700">{t('auth.forgot_password')}</a>
                         </div>
 
                         <button
                             disabled={loading}
                             className="w-full bg-slate-900 text-white py-4 rounded-xl font-bold text-lg hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                         >
-                            {loading ? 'Signing in...' : (
-                                <>Sign In <ArrowRight size={20} /></>
+                            {loading ? t('auth.signing_in') : (
+                                <>{t('auth.sign_in')} <ArrowRight size={20} /></>
                             )}
                         </button>
                     </form>
 
                     <p className="text-center mt-8 text-slate-500 text-sm">
-                        Don't have an account?{" "}
+                        {t('auth.dont_have_account')}{" "}
                         <Link href={`/signup?type=${userType}`} className="text-orange-600 font-bold hover:text-orange-700">
-                            Sign up for free
+                            {t('auth.sign_up_free')}
                         </Link>
                     </p>
                 </div>
@@ -178,30 +181,30 @@ function SignInContent() {
                     <div className="relative z-10">
                         <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md rounded-full px-4 py-1.5 text-sm font-medium border border-white/10 mb-8">
                             <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                            {userType === 'student' ? 'AI-Powered Support' : 'Admin Dashboard'}
+                            {userType === 'student' ? t('auth.ai_powered') : t('auth.admin_dashboard_visual')}
                         </div>
                         <h2 className="text-4xl font-bold leading-tight mb-6">
                             {userType === 'student'
-                                ? "Your personal ICON to mental wellness."
-                                : "Empower your school with data-driven insights."}
+                                ? t('auth.personal_icon')
+                                : t('auth.empower_school')}
                         </h2>
                         <p className="text-white/80 text-lg leading-relaxed max-w-md">
                             {userType === 'student'
-                                ? "Join thousands of students using Pathlight to navigate school, stress, and life with confidence."
-                                : "Monitor student well-being trends, manage resources, and ensure no student falls through the cracks."}
+                                ? t('auth.join_thousands')
+                                : t('auth.monitor_wellbeing')}
                         </p>
                     </div>
 
                     {/* Feature List */}
                     <div className="relative z-10 space-y-4">
                         {(userType === 'student' ? [
-                            "24/7 AI Counseling",
-                            "100% Anonymous & Secure",
-                            "Personalized Growth Plans"
+                            t('auth.features_student.counseling'),
+                            t('auth.features_student.anam'),
+                            t('auth.features_student.plans')
                         ] : [
-                            "Real-time Analytics",
-                            "Crisis Alert System",
-                            "Resource Management"
+                            t('auth.features_school.analytics'),
+                            t('auth.features_school.crisis'),
+                            t('auth.features_school.resource')
                         ]).map((item, i) => (
                             <div key={i} className="flex items-center gap-3 bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/5">
                                 <CheckCircle className="text-white" size={20} />

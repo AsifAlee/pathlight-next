@@ -1,0 +1,211 @@
+{
+    "career_advice": {
+        "title": "キャリアアドバイスを",
+        "native_tongue": "母国語で",
+        "description": "キャリアのニュアンスは翻訳で失われがちです。Pathlightは40以上の言語を流暢に話し、出身地に関係なく文化的背景や専門用語が正確であることを保証します。",
+        "global_reach": "グローバルリーチ",
+        "more": "その他",
+        "example_question": "クリエイティブな人に最適な仕事は何ですか？",
+        "example_answer": "クリエイティブな人にとって、選択肢は広大です。テクノロジーへの以前の興味に基づくと、UX/UIデザインやフロントエンド開発を検討することができます..."
+    },
+    "nav": {
+        "features": "特徴",
+        "how_it_works": "仕組み",
+        "guides": "私たちのアイコン",
+        "dashboard": "通話ダッシュボード",
+        "login": "ログイン",
+        "logout": "ログアウト",
+        "s_login": "学生",
+        "a_login": "管理者"
+    },
+    "home": {
+        "hero": {
+            "new_support": "新着: 24時間365日ライブサポート",
+            "title_prefix": "世界初の",
+            "title_suffix": "AIキャリアアイコン。",
+            "description": "メンタルヘルスとキャリアサポートの未来を体験してください。あなたに共鳴するアイコンを選び、学校、ストレス、人生のためのリアルタイムで偏見のないサポートを受けてください。",
+            "try_free": "無料で試す",
+            "see_features": "機能を見る",
+            "select_preview": "プレビューするアイコンを選択",
+            "tap_to_chat": "通話ボタンをタップしてチャットを開始",
+            "ai_icon": "AIアイコン"
+        },
+        "trust": {
+            "joining_forces": "革新的な学校と力を合わせる"
+        },
+        "guides": {
+            "title": "アイコンに会う",
+            "description": "メンタルヘルスは万能ではありません。私たちのプラットフォームは、実際のカウンセリングスタイルをモデルにしたさまざまなAIパーソナリティを提供します。",
+            "meet": "会う"
+        },
+        "how_it_works": {
+            "title": "3つの簡単なステップでのサポート",
+            "description": "テキストを送信したり、電話をかけたりするのと同じくらい簡単に助けを得られるようにしました。",
+            "step1_title": "接続",
+            "step1_desc": "学校のポータルまたは個人アカウントを通じて匿名で登録します。",
+            "step2_title": "対話",
+            "step2_desc": "テキストでチャットしたり、AIアバターとライブ音声セッションを行ったりします。",
+            "step3_title": "成長",
+            "step3_desc": "パーソナライズされた対処戦略を受け取り、進捗状況を追跡します。"
+        },
+        "features": {
+            "title": "完全な学生ウェルネスプラットフォーム",
+            "description": "高度なアバターインタラクションと臨床安全プロトコルを組み合わせています。",
+            "f1_title": "ライブアバター通話",
+            "f1_desc": "より人間的なつながりのための対面スタイルの対話。",
+            "f2_title": "感情分析",
+            "f2_desc": "燃え尽き症候群を早期に特定するためのリアルタイムの気分追跡。",
+            "f3_title": "危機エスカレーション",
+            "f3_desc": "深刻なリスクを検出し、即座に人間の専門家に警告します。",
+            "f4_title": "パーソナライズされた対処",
+            "f4_desc": "カスタマイズされた呼吸法、ジャーナリング、アドバイス。",
+            "f5_title": "リソースマッチング",
+            "f5_desc": "学生を既存の学校リソースに即座に接続します。",
+            "f6_title": "100% 匿名",
+            "f6_desc": "学生は判断や偏見を恐れることなく心を開くことができます。"
+        },
+        "impact": {
+            "title": "学校がPathlightを選ぶ理由",
+            "description": "私たちは、今日の学生のメンタルヘルスにおける最も差し迫った課題を解決するためにプラットフォームを設計しました。",
+            "view_benefit": "メリットを見る",
+            "stat1_val": "アクセシビリティ",
+            "stat1_label": "24時間365日のサポートは、学校の時間だけでなく、必要なときにいつでも助けを得られることを意味します。",
+            "stat2_val": "スケーラビリティ",
+            "stat2_label": "何千人もの学生を同時にサポートするための統合プラットフォーム。",
+            "stat3_val": "効率性",
+            "stat3_label": "人間のカウンセラーを解放し、深い介入を必要とする重要なケースに集中させます。",
+            "stat4_val": "エンゲージメント",
+            "stat4_label": "Z世代にとって親しみやすく、臨床的ではないモダンなアバターインターフェース。"
+        },
+        "schools": {
+            "admin_dashboard": "管理者ダッシュボード",
+            "title": "データでカウンセリングチームを強化。",
+            "description": "Pathlightはカウンセラーに取って代わるものではありません。彼らの範囲を広げます。学生のメンタルパルスに関する集約されたプライバシー準拠の洞察を取得し、リソースを最も必要な場所に割り当てます。",
+            "list1": "学年や学期のタイミングごとのストレスホットスポットを特定します。",
+            "list2": "いじめの傾向に対する早期警告システム。",
+            "list3": "自動化されたリソース配布。",
+            "list4": "完全なHIPAAおよびFERPA準拠。",
+            "view_dashboard": "管理者ダッシュボードを見る",
+            "system_active": "システム稼働中",
+            "monitoring": "1,240人の学生を監視中",
+            "engagement": "エンゲージメント"
+        },
+        "cta": {
+            "title": "学生をサポートする準備はできましたか？",
+            "description": "PathlightのAI技術で学生のメンタルヘルスサポートを変革する動きに参加してください。",
+            "request_demo": "デモをリクエスト",
+            "student_signup": "学生登録"
+        }
+    },
+    "offerings": {
+        "label": "提供内容",
+        "title": "完全なキャリアエコシステム",
+        "item1_title": "スキルギャップ分析",
+        "item1_desc": "学ぶ必要があることを推測するだけではありません。Pathlightは何千もの職務記述書をスキャンして、夢の役割に欠けているスキルを正確に特定します。",
+        "item1_li1": "Python vs Java分析",
+        "item1_li2": "ソフトスキル評価",
+        "item1_li3": "資格の推奨",
+        "item2_title": "大学＆専攻ファインダー",
+        "item2_desc": "専攻を選ぶのは気が遠くなるような作業です。私たちはあなたの認知プロファイルと興味を、あなたのような学生にとって満足度が最も高い大学のコースとマッチングさせます。",
+        "item2_li1": "グローバル大学データベース",
+        "item2_li2": "奨学金マッチング",
+        "item2_li3": "卒業生のキャリア軌跡データ",
+        "item3_title": "履歴書＆ポートフォリオビルダー",
+        "item3_desc": "私たちのAIは、特定の求人に合わせたATS対応の履歴書を作成し、際立ったポートフォリオを構築するためのプロジェクトを提案します。",
+        "item3_li1": "職務記述書への自動調整",
+        "item3_li2": "ポートフォリオプロジェクトのアイデア",
+        "item3_li3": "GitHubプロフィールアナライザー"
+    },
+    "footer": {
+        "description": "アクセスしやすく、安全で、インテリジェントなメンタルヘルスサポートで次世代を力づけます。",
+        "platform": "プラットフォーム",
+        "live_avatar": "ライブアバター",
+        "safety_protocols": "安全プロトコル",
+        "school_dashboard": "学校ダッシュボード",
+        "integration_api": "統合API",
+        "resources": "リソース",
+        "crisis_hotlines": "危機ホットライン",
+        "counselor_training": "カウンセラー研修",
+        "case_studies": "ケーススタディ",
+        "help_center": "ヘルプセンター",
+        "company": "会社",
+        "about_us": "私たちについて",
+        "careers": "採用情報",
+        "contact": "お問い合わせ",
+        "privacy_policy": "プライバシーポリシー",
+        "rights_reserved": "Pathlight AI Inc. 全著作権所有。",
+        "terms": "利用規約",
+        "privacy": "プライバシー",
+        "cookies": "クッキー"
+    },
+    "dashboard": {
+        "welcome": "ようこそ、{{name}}さん！",
+        "subtitle": "AIカウンセラーを選択して、パーソナライズされたセッションを開始してください。",
+        "choose_counselor": "カウンセラーを選択",
+        "start_session": "セッション開始",
+        "coming_soon": "近日公開",
+        "available": "24時間365日利用可能",
+        "available_desc": "いつでも、昼夜を問わずAIカウンセラーとつながります",
+        "private": "100% プライベート",
+        "private_desc": "あなたの会話は完全に機密扱いされます",
+        "personalized": "パーソナライズ済み",
+        "personalized_desc": "あなたの独自のニーズに基づいたカスタマイズされたサポート",
+        "sidebar": {
+            "counseling": "カウンセリング",
+            "history": "セッション履歴",
+            "settings": "設定",
+            "sign_out": "サインアウト"
+        },
+        "header": {
+            "title": "AIカウンセリングセッション"
+        }
+    },
+    "auth": {
+        "create_account": "アカウントを作成",
+        "join_today": "今すぐPathlightに参加して、旅を始めましょう。",
+        "student": "学生",
+        "school_admin": "学校管理者",
+        "full_name": "氏名",
+        "email": "メールアドレス",
+        "password": "パスワード",
+        "create_account_btn": "アカウント作成",
+        "creating_account": "アカウント作成中...",
+        "already_have_account": "すでにアカウントをお持ちですか？",
+        "sign_in": "サインイン",
+        "sign_up_free": "無料で登録",
+        "welcome_back": "お帰りなさい",
+        "enter_details": "サインインするには詳細を入力してください。",
+        "remember_me": "私を記憶する",
+        "forgot_password": "パスワードをお忘れですか？",
+        "signing_in": "サインイン中...",
+        "dont_have_account": "アカウントをお持ちではありませんか？",
+        "join_community": "コミュニティに参加",
+        "partner_with_us": "私たちと提携",
+        "start_journey": "今日からウェルネスの旅を始めましょう。",
+        "transform_school": "学校のメンタルヘルスサポートを変革します。",
+        "student_access": "AIカウンセラー、パーソナライズされたツール、サポートコミュニティに即座にアクセスできます。",
+        "school_access": "高度な技術で学生の幸福を優先する先進的な学校のネットワークに参加してください。",
+        "ai_powered": "AI搭載サポート",
+        "admin_dashboard_visual": "管理者ダッシュボード",
+        "personal_icon": "メンタルウェルネスのためのあなたのパーソナルアイコン。",
+        "empower_school": "データ駆動型の洞察で学校を強化します。",
+        "join_thousands": "自信を持って学校、ストレス、人生をナビゲートするためにPathlightを使用している何千人もの学生に参加してください。",
+        "monitor_wellbeing": "学生の幸福の傾向を監視し、リソースを管理し、学生が取り残されないようにします。",
+        "features_student": {
+            "free": "学生は無料",
+            "private": "非公開＆機密",
+            "instant": "即時アクセス",
+            "counseling": "24時間365日AIカウンセリング",
+            "anam": "100%匿名＆安全",
+            "plans": "パーソナライズされた成長プラン"
+        },
+        "features_school": {
+            "implementation": "簡単な実装",
+            "compliance": "完全準拠",
+            "support": "専用サポート",
+            "analytics": "リアルタイム分析",
+            "crisis": "危機アラートシステム",
+            "resource": "リソース管理"
+        }
+    }
+}

@@ -1,0 +1,211 @@
+{
+    "career_advice": {
+        "title": "Career Advice in",
+        "native_tongue": "Your Native Tongue",
+        "description": "Career nuances are often lost in translation. Pathlight speaks 40+ languages fluently, ensuring that cultural context and specific terminology are accurate, no matter where you are from.",
+        "global_reach": "Global Reach",
+        "more": "more",
+        "example_question": "What are the best jobs for someone creative?",
+        "example_answer": "For a creative person, the options are vast. Based on your previous interests in technology, you could consider UX/UI Design or Frontend Development..."
+    },
+    "nav": {
+        "features": "Features",
+        "how_it_works": "How it Works",
+        "guides": "Our ICONS",
+        "dashboard": "Call Dashboard",
+        "login": "Login",
+        "logout": "Logout",
+        "s_login": "Student",
+        "a_login": "Administrator"
+    },
+    "home": {
+        "hero": {
+            "new_support": "New: Live 24/7 Support",
+            "title_prefix": "The World's First",
+            "title_suffix": "AI Career ICON.",
+            "description": "Experience the future of mental health and career support. Choose an ICON that resonates with you and get real-time, judgment-free support for school, stress, and life.",
+            "try_free": "Try It Free",
+            "see_features": "See Features",
+            "select_preview": "Select your ICON to preview",
+            "tap_to_chat": "Tap call button to start chat",
+            "ai_icon": "AI ICON"
+        },
+        "trust": {
+            "joining_forces": "Joining forces with innovative schools"
+        },
+        "guides": {
+            "title": "Meet Your ICONS",
+            "description": "Mental health isn't one-size-fits-all. Our platform offers a range of AI personalities modeled after real counseling styles.",
+            "meet": "Meet"
+        },
+        "how_it_works": {
+            "title": "Support in 3 Simple Steps",
+            "description": "We've made getting help as easy as sending a text or hopping on a call.",
+            "step1_title": "Connect",
+            "step1_desc": "Sign up anonymously through your school portal or personal account.",
+            "step2_title": "Interact",
+            "step2_desc": "Chat via text or have a live voice session with your AI avatar.",
+            "step3_title": "Grow",
+            "step3_desc": "Receive personalized coping strategies and track your progress."
+        },
+        "features": {
+            "title": "Complete Student Wellness Platform",
+            "description": "Combining advanced avatar interaction with clinical safety protocols.",
+            "f1_title": "Live Avatar Calls",
+            "f1_desc": "Face-to-face style interaction for a more human connection.",
+            "f2_title": "Sentiment Analysis",
+            "f2_desc": "Real-time mood tracking to identify burnout early.",
+            "f3_title": "Crisis Escalation",
+            "f3_desc": "Detects severe risks and alerts human professionals instantly.",
+            "f4_title": "Personalized Coping",
+            "f4_desc": "Tailored breathing exercises, journaling, and advice.",
+            "f5_title": "Resource Matching",
+            "f5_desc": "Connects students to existing school resources instantly.",
+            "f6_title": "100% Anonymous",
+            "f6_desc": "Students can open up without fear of judgment or stigma."
+        },
+        "impact": {
+            "title": "Why Schools Choose Pathlight",
+            "description": "We designed our platform to solve the most pressing challenges in student mental health today.",
+            "view_benefit": "View Benefit",
+            "stat1_val": "Accessibility",
+            "stat1_label": "24/7 support means students get help whenever they need it, not just during school hours.",
+            "stat2_val": "Scalability",
+            "stat2_label": "One unified platform to support thousands of students simultaneously.",
+            "stat3_val": "Efficiency",
+            "stat3_label": "Frees up human counselors to focus on critical cases requiring deep intervention.",
+            "stat4_val": "Engagement",
+            "stat4_label": "Modern avatar interface feels approachable and less clinical for Gen Z."
+        },
+        "schools": {
+            "admin_dashboard": "Admin Dashboard",
+            "title": "Empower your counseling team with data.",
+            "description": "Pathlight doesn't replace counselors; it extends their reach. Get aggregated, privacy-compliant insights into the mental pulse of your student body to allocate resources where they are needed most.",
+            "list1": "Identify stress hotspots by grade or semester timing.",
+            "list2": "Early warning system for bullying trends.",
+            "list3": "Automated resource distribution.",
+            "list4": "Full HIPAA & FERPA Compliance.",
+            "view_dashboard": "View Admin Dashboard",
+            "system_active": "System Active",
+            "monitoring": "Monitoring 1,240 Students",
+            "engagement": "Engagement"
+        },
+        "cta": {
+            "title": "Ready to support your students?",
+            "description": "Join the movement transforming student mental health support with Pathlight's AI technology.",
+            "request_demo": "Request Demo",
+            "student_signup": "Student Sign Up"
+        }
+    },
+    "offerings": {
+        "label": "Offerings",
+        "title": "Complete Career Ecosystem",
+        "item1_title": "Skill Gap Analysis",
+        "item1_desc": "Don't just guess what you need to learn. Pathlight scans thousands of job descriptions to identify exactly which skills you are missing for your dream role.",
+        "item1_li1": "Python vs Java analysis",
+        "item1_li2": "Soft skills assessment",
+        "item1_li3": "Certification recommendations",
+        "item2_title": "University & Major Finder",
+        "item2_desc": "Choosing a major is daunting. We match your cognitive profile and interests with university courses that have the highest satisfaction rates for students like you.",
+        "item2_li1": "Global university database",
+        "item2_li2": "Scholarship matching",
+        "item2_li3": "Alumni career trajectory data",
+        "item3_title": "Resume & Portfolio Builder",
+        "item3_desc": "Our AI generates ATS-friendly resumes tailored to specific job openings and suggests projects to build a portfolio that stands out.",
+        "item3_li1": "Auto-tailoring to job descriptions",
+        "item3_li2": "Portfolio project ideas",
+        "item3_li3": "GitHub profile analyzer"
+    },
+    "footer": {
+        "description": "Empowering the next generation with accessible, safe, and intelligent mental health support.",
+        "platform": "Platform",
+        "live_avatar": "Live Avatar",
+        "safety_protocols": "Safety Protocols",
+        "school_dashboard": "School Dashboard",
+        "integration_api": "Integration API",
+        "resources": "Resources",
+        "crisis_hotlines": "Crisis Hotlines",
+        "counselor_training": "Counselor Training",
+        "case_studies": "Case Studies",
+        "help_center": "Help Center",
+        "company": "Company",
+        "about_us": "About Us",
+        "careers": "Careers",
+        "contact": "Contact",
+        "privacy_policy": "Privacy Policy",
+        "rights_reserved": "Pathlight AI Inc. All rights reserved.",
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "cookies": "Cookies"
+    },
+    "dashboard": {
+        "welcome": "Welcome, {{name}}!",
+        "subtitle": "Choose your AI counselor and start a personalized session.",
+        "choose_counselor": "Choose Your Counselor",
+        "start_session": "Start Session",
+        "coming_soon": "Coming Soon",
+        "available": "24/7 Available",
+        "available_desc": "Connect with your AI counselor anytime, day or night",
+        "private": "100% Private",
+        "private_desc": "Your conversations are completely confidential",
+        "personalized": "Personalized",
+        "personalized_desc": "Tailored support based on your unique needs",
+        "sidebar": {
+            "counseling": "Counseling",
+            "history": "Session History",
+            "settings": "Settings",
+            "sign_out": "Sign Out"
+        },
+        "header": {
+            "title": "AI Counseling Session"
+        }
+    },
+    "auth": {
+        "create_account": "Create an account",
+        "join_today": "Join Pathlight today and start your journey.",
+        "student": "Student",
+        "school_admin": "School Admin",
+        "full_name": "Full Name",
+        "email": "Email",
+        "password": "Password",
+        "create_account_btn": "Create Account",
+        "creating_account": "Creating Account...",
+        "already_have_account": "Already have an account?",
+        "sign_in": "Sign in",
+        "sign_up_free": "Sign up for free",
+        "welcome_back": "Welcome back",
+        "enter_details": "Please enter your details to sign in.",
+        "remember_me": "Remember me",
+        "forgot_password": "Forgot password?",
+        "signing_in": "Signing in...",
+        "dont_have_account": "Don't have an account?",
+        "join_community": "Join the Community",
+        "partner_with_us": "Partner With Us",
+        "start_journey": "Start your wellness journey today.",
+        "transform_school": "Transform your school's mental health support.",
+        "student_access": "Get instant access to AI counselors, personalized tools, and a supportive community.",
+        "school_access": "Join a network of forward-thinking schools prioritizing student well-being with advanced technology.",
+        "ai_powered": "AI-Powered Support",
+        "admin_dashboard_visual": "Admin Dashboard",
+        "personal_icon": "Your personal ICON to mental wellness.",
+        "empower_school": "Empower your school with data-driven insights.",
+        "join_thousands": "Join thousands of students using Pathlight to navigate school, stress, and life with confidence.",
+        "monitor_wellbeing": "Monitor student well-being trends, manage resources, and ensure no student falls through the cracks.",
+        "features_student": {
+            "free": "Free for Students",
+            "private": "Private & Confidential",
+            "instant": "Instant Access",
+            "counseling": "24/7 AI Counseling",
+            "anam": "100% Anonymous & Secure",
+            "plans": "Personalized Growth Plans"
+        },
+        "features_school": {
+            "implementation": "Easy Implementation",
+            "compliance": "Full Compliance",
+            "support": "Dedicated Support",
+            "analytics": "Real-time Analytics",
+            "crisis": "Crisis Alert System",
+            "resource": "Resource Management"
+        }
+    }
+}

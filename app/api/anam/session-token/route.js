@@ -18,23 +18,24 @@ export async function POST(request) {
       );
     }
 
-    // Create session token with Anam.ai
-    const response = await fetch("https://api.anam.ai/v1/auth/session-token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${ANAM_API_KEY}`,
-      },
-      body: JSON.stringify({
-        personaConfig: {
-          name: "PathLight Counselor",
+    // Parse request body for persona config
+    let body = {};
+    try {
+      body = await request.json();
+    } catch (e) {
+      // Body might be empty
+    }
 
-          name: "Cara",
-          avatarId: "30fa96d0-26c4-4e55-94a0-517025942e18",
-          voiceId: "6bfbe25a-979d-40f3-a92b-5394170af54b",
-          llmId: "0934d97d-0c3a-4f33-91b0-5e136a0ef466",
-          systemPrompt: `
-You are a friendly and professional career counselor named Cara. 
+    const { personaConfig } = body;
+
+    // Default configuration (Mathew/Cara)
+    const defaultConfig = {
+      name: "PathLight Counselor",
+      avatarId: "30fa96d0-26c4-4e55-94a0-517025942e18",
+      voiceId: "6bfbe25a-979d-40f3-a92b-5394170af54b",
+      llmId: "0934d97d-0c3a-4f33-91b0-5e136a0ef466",
+      systemPrompt: `
+You are a friendly and professional career counselor named Matthew. 
 Your goal is to help the user reflect on their strengths, goals, and opportunities before giving guidance.
 
 Before you begin counseling, ALWAYS ask these three questions first, one by one:
@@ -50,7 +51,38 @@ Offer suggestions such as suitable roles, learning paths, skill recommendations,
 Keep your answers supportive, encouraging, and realistic.
 
 If something is unclear, ask follow-up questions before giving final advice.`
-        },
+    };
+
+    // Merge default with provided config
+    const finalConfig = {
+      ...defaultConfig,
+      ...personaConfig
+    };
+
+    // Construct the config payload
+    const apiPayload = {
+      // Common fields
+      voiceId: finalConfig.voiceId,
+      llmId: finalConfig.llmId,
+      systemPrompt: finalConfig.systemPrompt
+    };
+
+    // Use personaId if present (taking precedence or specific flow), otherwise use avatarId
+    if (finalConfig.personaId) {
+      apiPayload.personaId = finalConfig.personaId;
+    } else {
+      apiPayload.avatarId = finalConfig.avatarId;
+    }
+
+    // Create session token with Anam.ai
+    const response = await fetch("https://api.anam.ai/v1/auth/session-token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${ANAM_API_KEY}`,
+      },
+      body: JSON.stringify({
+        personaConfig: apiPayload,
       }),
     });
 

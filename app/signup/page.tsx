@@ -6,8 +6,11 @@ import { useSearchParams, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { Logo } from "../components/Logo";
 import { ArrowRight, Mail, Lock, School, User, CheckCircle, UserCircle, Eye, EyeOff } from "lucide-react";
+import { useTranslation } from 'react-i18next';
+import '../i18n';
 
 function SignUpContent() {
+    const { t } = useTranslation();
     const searchParams = useSearchParams();
     const router = useRouter();
     const initialType = searchParams.get('type') === 'school' ? 'school' : 'student';
@@ -69,8 +72,8 @@ function SignUpContent() {
                         <Link href="/" className="inline-flex items-center gap-2 text-orange-600 mb-6 hover:opacity-80 transition-opacity">
                             <Logo className="w-32 h-32" />
                         </Link>
-                        <h1 className="text-3xl font-bold text-slate-900 mb-2">Create an account</h1>
-                        <p className="text-slate-500">Join Pathlight today and start your journey.</p>
+                        <h1 className="text-3xl font-bold text-slate-900 mb-2">{t('auth.create_account')}</h1>
+                        <p className="text-slate-500">{t('auth.join_today')}</p>
                     </div>
 
                     {/* User Type Toggle */}
@@ -83,7 +86,7 @@ function SignUpContent() {
                                 }`}
                         >
                             <User size={18} />
-                            Student
+                            {t('auth.student')}
                         </button>
                         <button
                             onClick={() => setUserType('school')}
@@ -93,7 +96,7 @@ function SignUpContent() {
                                 }`}
                         >
                             <School size={18} />
-                            School Admin
+                            {t('auth.school_admin')}
                         </button>
                     </div>
 
@@ -105,7 +108,7 @@ function SignUpContent() {
 
                     <form className="space-y-5" onSubmit={handleSignUp}>
                         <div className="space-y-1.5">
-                            <label className="text-sm font-semibold text-slate-700">Full Name</label>
+                            <label className="text-sm font-semibold text-slate-700">{t('auth.full_name')}</label>
                             <div className="relative">
                                 <UserCircle className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
                                 <input
@@ -120,7 +123,7 @@ function SignUpContent() {
                         </div>
 
                         <div className="space-y-1.5">
-                            <label className="text-sm font-semibold text-slate-700">Email</label>
+                            <label className="text-sm font-semibold text-slate-700">{t('auth.email')}</label>
                             <div className="relative">
                                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
                                 <input
@@ -135,7 +138,7 @@ function SignUpContent() {
                         </div>
 
                         <div className="space-y-1.5">
-                            <label className="text-sm font-semibold text-slate-700">Password</label>
+                            <label className="text-sm font-semibold text-slate-700">{t('auth.password')}</label>
                             <div className="relative">
                                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
                                 <input
@@ -161,17 +164,17 @@ function SignUpContent() {
                                 // disabled={loading}
                                 disabled={true} className="w-full bg-slate-900 text-white py-4 rounded-xl font-bold text-lg hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                             >
-                                {loading ? 'Creating Account...' : (
-                                    <>Create Account <ArrowRight size={20} /></>
+                                {loading ? t('auth.creating_account') : (
+                                    <>{t('auth.create_account_btn')} <ArrowRight size={20} /></>
                                 )}
                             </button>
                         </div>
                     </form>
 
                     <p className="text-center mt-8 text-slate-500 text-sm">
-                        Already have an account?{" "}
+                        {t('auth.already_have_account')}{" "}
                         <Link href={`/signin?type=${userType}`} className="text-orange-600 font-bold hover:text-orange-700">
-                            Sign in
+                            {t('auth.sign_in')}
                         </Link>
                     </p>
                 </div>
@@ -188,30 +191,30 @@ function SignUpContent() {
                     <div className="relative z-10">
                         <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md rounded-full px-4 py-1.5 text-sm font-medium border border-white/10 mb-8">
                             <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                            {userType === 'student' ? 'Join the Community' : 'Partner With Us'}
+                            {userType === 'student' ? t('auth.join_community') : t('auth.partner_with_us')}
                         </div>
                         <h2 className="text-4xl font-bold leading-tight mb-6">
                             {userType === 'student'
-                                ? "Start your wellness journey today."
-                                : "Transform your school's mental health support."}
+                                ? t('auth.start_journey')
+                                : t('auth.transform_school')}
                         </h2>
                         <p className="text-white/80 text-lg leading-relaxed max-w-md">
                             {userType === 'student'
-                                ? "Get instant access to AI counselors, personalized tools, and a supportive community."
-                                : "Join a network of forward-thinking schools prioritizing student well-being with advanced technology."}
+                                ? t('auth.student_access')
+                                : t('auth.school_access')}
                         </p>
                     </div>
 
                     {/* Feature List */}
                     <div className="relative z-10 space-y-4">
                         {(userType === 'student' ? [
-                            "Free for Students",
-                            "Private & Confidential",
-                            "Instant Access"
+                            t('auth.features_student.free'),
+                            t('auth.features_student.private'),
+                            t('auth.features_student.instant')
                         ] : [
-                            "Easy Implementation",
-                            "Full Compliance",
-                            "Dedicated Support"
+                            t('auth.features_school.implementation'),
+                            t('auth.features_school.compliance'),
+                            t('auth.features_school.support')
                         ]).map((item, i) => (
                             <div key={i} className="flex items-center gap-3 bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/5">
                                 <CheckCircle className="text-white" size={20} />

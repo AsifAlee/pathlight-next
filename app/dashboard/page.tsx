@@ -5,16 +5,14 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Logo } from "../components/Logo";
 import toast from "react-hot-toast";
-import { LogOut, User, Video, Settings, History } from "lucide-react";
-import VideoCallInterface from "../components/VideoCallInterface";
+import { LogOut, User, Video, Settings, History, Notebook, Phone } from "lucide-react";
 import AnamVideoCallInterface from "../components/AnamVideoCallInterface";
-
-import {
-    Notebook
-} from 'lucide-react';
 import NotesSidebar from "../components/NotesSidebar";
+import { useTranslation } from 'react-i18next';
+import '../i18n';
 
 export default function Dashboard() {
+    const { t } = useTranslation();
     const router = useRouter();
     const [user, setUser] = useState<{ name: string; email: string; role: string } | null>(null);
     const [loading, setLoading] = useState(true);
@@ -27,13 +25,28 @@ export default function Dashboard() {
             id: 'matthew',
             name: 'Matthew McConaughey',
             role: 'Motivational Coach',
-            image: '/counselor-avatar.jpg', // Using existing avatar as placeholder or upload new one
-            replicaId: "r92debe21318",
-            personaId: "p66ca14bd844",
+            image: '/counselor-avatar.jpg',
+            // Default Cara/Matthew
+            // Default Cara/Matthew
+            // personaId: "30fa96\u2026" - This was acting as avatarId before
+            avatarId: "30fa96d0-26c4-4e55-94a0-517025942e18",
+            voiceId: "6bfbe25a-979d-40f3-a92b-5394170af54b",
+            systemPrompt: "You are a friendly and professional career counselor named Matthew...",
             enabled: true,
             description: "Energetic and enthusiastic guidance to help you find your path!"
         },
-
+        {
+            id: 'hilda',
+            name: 'Hilda Solis',
+            role: 'Public Service & Policy',
+            image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Hilda_Solis_official_portrait.jpg/800px-Hilda_Solis_official_portrait.jpg',
+            personaId: "ad6e01e0-3b30-47a1-8497-8b31827a355e",
+            voiceId: "d79f2051-3a89-4fcc-8c71-cf5d53f9d9e0",
+            // The prompt will be sent from here or handled in backend if not provided, but plan says send it.
+            systemPrompt: "You are Hilda Solis, a dedicated public servant and former U.S. Secretary of Labor. Your goal is to mentor students interested in public service, community organizing, and government. Draw from your experience as the first Latina in the California State Senate and in the Obama administration. Be encouraging, emphasizing the importance of diverse voices in leadership. Guide them on civic engagement and career paths in policy.",
+            enabled: true,
+            description: "Expert guidance on public service, labor rights, and community leadership."
+        },
         {
             id: 'bill',
             name: 'Bill Gates',
@@ -88,7 +101,7 @@ export default function Dashboard() {
             localStorage.removeItem("token");
             localStorage.removeItem("user");
 
-            toast.success("Logged out successfully");
+            toast.success(t('nav.logout') + " successful"); // Simple fallback or add key
             router.push("/signin");
         } catch (error) {
             console.error('Logout error:', error);
@@ -132,15 +145,15 @@ export default function Dashboard() {
                 <nav className="px-4 space-y-2 mt-4">
                     <a href="#" className="flex items-center gap-3 px-4 py-3 bg-orange-50 text-orange-600 rounded-xl font-medium">
                         <Video size={20} />
-                        Counseling
+                        {t('dashboard.sidebar.counseling')}
                     </a>
                     <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-xl font-medium transition-colors">
                         <History size={20} />
-                        Session History
+                        {t('dashboard.sidebar.history')}
                     </a>
                     <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-xl font-medium transition-colors">
                         <Settings size={20} />
-                        Settings
+                        {t('dashboard.sidebar.settings')}
                     </a>
                 </nav>
 
@@ -150,7 +163,7 @@ export default function Dashboard() {
                         className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-xl font-medium transition-colors w-full"
                     >
                         <LogOut size={20} />
-                        Sign Out
+                        {t('dashboard.sidebar.sign_out')}
                     </button>
                 </div>
             </aside>
@@ -159,7 +172,7 @@ export default function Dashboard() {
             <main className="lg:ml-64 min-h-screen">
                 {/* Header */}
                 <header className="bg-white border-b border-slate-200 sticky top-0 z-10 px-8 py-4 flex items-center justify-between">
-                    <h1 className="text-xl font-bold text-slate-800">AI Counseling Session</h1>
+                    <h1 className="text-xl font-bold text-slate-800">{t('dashboard.header.title')}</h1>
 
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-bold">
@@ -179,10 +192,10 @@ export default function Dashboard() {
                         <div className="max-w-4xl mx-auto">
                             <div className="text-center mb-10">
                                 <h2 className="text-3xl font-bold text-slate-900 mb-3">
-                                    Welcome, {user?.name}! 👋
+                                    {t('dashboard.welcome', { name: user?.name || 'User' })}
                                 </h2>
                                 <p className="text-slate-600 text-lg">
-                                    Choose your AI counselor and start a personalized session.
+                                    {t('dashboard.subtitle')}
                                 </p>
                             </div>
 
@@ -190,7 +203,7 @@ export default function Dashboard() {
                             <div className="mb-12">
                                 <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
                                     <User size={24} className="text-orange-500" />
-                                    Choose Your Counselor
+                                    {t('dashboard.choose_counselor')}
                                 </h3>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -213,14 +226,14 @@ export default function Dashboard() {
                                                 {!persona.enabled && (
                                                     <div className="absolute inset-0 bg-slate-900/60 flex items-center justify-center">
                                                         <span className="bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold border border-white/30">
-                                                            Coming Soon
+                                                            {t('dashboard.coming_soon')}
                                                         </span>
                                                     </div>
                                                 )}
                                                 {persona.enabled && (
                                                     <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                                                         <span className="bg-orange-600 text-white px-4 py-2 rounded-full font-bold shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                                                            Start Session
+                                                            {t('dashboard.start_session')}
                                                         </span>
                                                     </div>
                                                 )}
@@ -235,15 +248,15 @@ export default function Dashboard() {
                                 </div>
                             </div>
 
-                            {/* Info Section (moved down or condensed if needed, keeping similar layout) */}
+                            {/* Info Section */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-start gap-4">
                                     <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 shrink-0">
                                         <Video size={20} />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-slate-900 mb-1">24/7 Available</h3>
-                                        <p className="text-slate-600 text-xs text-balance">Connect with your AI counselor anytime, day or night</p>
+                                        <h3 className="font-bold text-slate-900 mb-1">{t('dashboard.available')}</h3>
+                                        <p className="text-slate-600 text-xs text-balance">{t('dashboard.available_desc')}</p>
                                     </div>
                                 </div>
 
@@ -252,8 +265,8 @@ export default function Dashboard() {
                                         <User size={20} />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-slate-900 mb-1">100% Private</h3>
-                                        <p className="text-slate-600 text-xs text-balance">Your conversations are completely confidential</p>
+                                        <h3 className="font-bold text-slate-900 mb-1">{t('dashboard.private')}</h3>
+                                        <p className="text-slate-600 text-xs text-balance">{t('dashboard.private_desc')}</p>
                                     </div>
                                 </div>
 
@@ -262,8 +275,8 @@ export default function Dashboard() {
                                         <Settings size={20} />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-slate-900 mb-1">Personalized</h3>
-                                        <p className="text-slate-600 text-xs text-balance">Tailored support based on your unique needs</p>
+                                        <h3 className="font-bold text-slate-900 mb-1">{t('dashboard.personalized')}</h3>
+                                        <p className="text-slate-600 text-xs text-balance">{t('dashboard.personalized_desc')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -274,7 +287,11 @@ export default function Dashboard() {
                             <AnamVideoCallInterface
                                 onEndCall={endCall}
                                 personaConfig={selectedPersona ? {
-                                    personaId: selectedPersona.personaId
+                                    // Explicitly map properties - only once
+                                    personaId: selectedPersona.personaId,
+                                    avatarId: selectedPersona.avatarId,
+                                    voiceId: selectedPersona.voiceId,
+                                    systemPrompt: selectedPersona.systemPrompt
                                 } : undefined}
                             />
                         </div>

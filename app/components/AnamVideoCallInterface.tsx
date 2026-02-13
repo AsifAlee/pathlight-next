@@ -10,7 +10,11 @@ import { PersonaConfig } from "@anam-ai/js-sdk/dist/module/types";
 interface AnamVideoCallInterfaceProps {
     onEndCall: () => void;
     personaConfig?: {
-        personaId: string;
+        personaId?: string;
+        avatarId?: string;
+        voiceId?: string;
+        systemPrompt?: string;
+        llmId?: string;
     };
 }
 
@@ -74,8 +78,12 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig }: Ana
             const tokenResponse = await fetch("/api/anam/session-token", {
                 method: "POST",
                 headers: {
+                    "Content-Type": "application/json",
                     "Authorization": `Bearer ${localStorage.getItem("token") || ""}`
-                }
+                },
+                body: JSON.stringify({
+                    personaConfig: personaConfig
+                })
             });
 
             if (!tokenResponse.ok) {

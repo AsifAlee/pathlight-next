@@ -1,0 +1,211 @@
+{
+    "career_advice": {
+        "title": "Consejos Profesionales en",
+        "native_tongue": "Tu Idioma Nativo",
+        "description": "Los matices profesionales a menudo se pierden en la traducción. Pathlight habla con fluidez más de 40 idiomas, asegurando que el contexto cultural y la terminología específica sean precisos, sin importar de dónde seas.",
+        "global_reach": "Alcance Global",
+        "more": "más",
+        "example_question": "¿Cuáles son los mejores trabajos para alguien creativo?",
+        "example_answer": "Para una persona creativa, las opciones son vastas. Basado en tus intereses previos en tecnología, podrías considerar Diseño UX/UI o Desarrollo de Frontend..."
+    },
+    "nav": {
+        "features": "Características",
+        "how_it_works": "Cómo Funciona",
+        "guides": "Nuestros ICONOS",
+        "dashboard": "Panel de Llamadas",
+        "login": "Iniciar Sesión",
+        "logout": "Cerrar Sesión",
+        "s_login": "Estudiante",
+        "a_login": "Administrador"
+    },
+    "home": {
+        "hero": {
+            "new_support": "Nuevo: Soporte 24/7 en Vivo",
+            "title_prefix": "El Primer",
+            "title_suffix": "ICONO de Carrera con IA del Mundo.",
+            "description": "Experimenta el futuro del apoyo en salud mental y carrera. Elige un ICONO que resuene contigo y obtén apoyo en tiempo real, sin juicios, para la escuela, el estrés y la vida.",
+            "try_free": "Pruébalo Gratis",
+            "see_features": "Ver Características",
+            "select_preview": "Selecciona tu ICONO para previsualizar",
+            "tap_to_chat": "Toca el botón de llamada para chatear",
+            "ai_icon": "ICONO IA"
+        },
+        "trust": {
+            "joining_forces": "Uniendo fuerzas con escuelas innovadoras"
+        },
+        "guides": {
+            "title": "Conoce a Tus ICONOS",
+            "description": "La salud mental no es talla única. Nuestra plataforma ofrece una gama de personalidades de IA modeladas según estilos de consejería reales.",
+            "meet": "Conoce a"
+        },
+        "how_it_works": {
+            "title": "Apoyo en 3 Pasos Simples",
+            "description": "Hemos hecho que obtener ayuda sea tan fácil como enviar un mensaje de texto o hacer una llamada.",
+            "step1_title": "Conecta",
+            "step1_desc": "Regístrate anónimamente a través de tu portal escolar o cuenta personal.",
+            "step2_title": "Interactúa",
+            "step2_desc": "Chatea por texto o ten una sesión de voz en vivo con tu avatar de IA.",
+            "step3_title": "Crece",
+            "step3_desc": "Recibe estrategias de afrontamiento personalizadas y sigue tu progreso."
+        },
+        "features": {
+            "title": "Plataforma Completa de Bienestar Estudiantil",
+            "description": "Combinando interacción avanzada de avatar con protocolos de seguridad clínica.",
+            "f1_title": "Llamadas de Avatar en Vivo",
+            "f1_desc": "Interacción estilo cara a cara para una conexión más humana.",
+            "f2_title": "Análisis de Sentimiento",
+            "f2_desc": "Seguimiento del estado de ánimo en tiempo real para identificar el agotamiento temprano.",
+            "f3_title": "Escalada de Crisis",
+            "f3_desc": "Detecta riesgos graves y alerta a profesionales humanos al instante.",
+            "f4_title": "Afrontamiento Personalizado",
+            "f4_desc": "Ejercicios de respiración a medida, diario y consejos.",
+            "f5_title": "Coincidencia de Recursos",
+            "f5_desc": "Conecta a los estudiantes con recursos escolares existentes al instante.",
+            "f6_title": "100% Anónimo",
+            "f6_desc": "Los estudiantes pueden abrirse sin miedo al juicio o estigma."
+        },
+        "impact": {
+            "title": "¿Por qué las Escuelas Eligen Pathlight?",
+            "description": "Diseñamos nuestra plataforma para resolver los desafíos más apremiantes en la salud mental estudiantil hoy en día.",
+            "view_benefit": "Ver Beneficio",
+            "stat1_val": "Accesibilidad",
+            "stat1_label": "Soporte 24/7 significa que los estudiantes reciben ayuda cuando la necesitan, no solo durante el horario escolar.",
+            "stat2_val": "Escalabilidad",
+            "stat2_label": "Una plataforma unificada para apoyar a miles de estudiantes simultáneamente.",
+            "stat3_val": "Eficiencia",
+            "stat3_label": "Libera a los consejeros humanos para centrarse en casos críticos que requieren intervención profunda.",
+            "stat4_val": "Compromiso",
+            "stat4_label": "La interfaz de avatar moderna se siente accesible y menos clínica para la Gen Z."
+        },
+        "schools": {
+            "admin_dashboard": "Panel de Administración",
+            "title": "Empodera a tu equipo de consejería con datos.",
+            "description": "Pathlight no reemplaza a los consejeros; extiende su alcance. Obtén información agregada y compatible con la privacidad sobre el pulso mental de tu cuerpo estudiantil para asignar recursos donde más se necesitan.",
+            "list1": "Identifica puntos críticos de estrés por grado o momento del semestre.",
+            "list2": "Sistema de alerta temprana para tendencias de acoso.",
+            "list3": "Distribución automatizada de recursos.",
+            "list4": "Cumplimiento total de HIPAA y FERPA.",
+            "view_dashboard": "Ver Panel de Administración",
+            "system_active": "Sistema Activo",
+            "monitoring": "Monitoreando 1,240 Estudiantes",
+            "engagement": "Compromiso"
+        },
+        "cta": {
+            "title": "¿Listo para apoyar a tus estudiantes?",
+            "description": "Únete al movimiento que transforma el apoyo a la salud mental estudiantil con la tecnología de IA de Pathlight.",
+            "request_demo": "Solicitar Demo",
+            "student_signup": "Registro de Estudiante"
+        }
+    },
+    "offerings": {
+        "label": "Ofertas",
+        "title": "Ecosistema de Carrera Completo",
+        "item1_title": "Análisis de Brechas de Habilidades",
+        "item1_desc": "No adivines qué necesitas aprender. Pathlight escanea miles de descripciones de trabajo para identificar exactamente qué habilidades te faltan para el puesto de tus sueños.",
+        "item1_li1": "Análisis de Python vs Java",
+        "item1_li2": "Evaluación de habilidades blandas",
+        "item1_li3": "Recomendaciones de certificación",
+        "item2_title": "Buscador de Universidades y Carreras",
+        "item2_desc": "Elegir una carrera es abrumador. Emparejamos tu perfil cognitivo e intereses con cursos universitarios que tienen las tasas de satisfacción más altas para estudiantes como tú.",
+        "item2_li1": "Base de datos universitaria global",
+        "item2_li2": "Coincidencia de becas",
+        "item2_li3": "Datos de trayectoria profesional de exalumnos",
+        "item3_title": "Constructor de Currículum y Portafolio",
+        "item3_desc": "Nuestra IA genera currículums compatibles con ATS adaptados a ofertas de trabajo específicas y sugiere proyectos para construir un portafolio que destaque.",
+        "item3_li1": "Adaptación automática a descripciones de trabajo",
+        "item3_li2": "Ideas de proyectos de portafolio",
+        "item3_li3": "Analizador de perfil de GitHub"
+    },
+    "footer": {
+        "description": "Empoderando a la próxima generación con apoyo de salud mental accesible, seguro e inteligente.",
+        "platform": "Plataforma",
+        "live_avatar": "Avatar en Vivo",
+        "safety_protocols": "Protocolos de Seguridad",
+        "school_dashboard": "Panel Escolar",
+        "integration_api": "API de Integración",
+        "resources": "Recursos",
+        "crisis_hotlines": "Líneas de Crisis",
+        "counselor_training": "Entrenamiento de Consejeros",
+        "case_studies": "Estudios de Caso",
+        "help_center": "Centro de Ayuda",
+        "company": "Compañía",
+        "about_us": "Sobre Nosotros",
+        "careers": "Carreras",
+        "contact": "Contacto",
+        "privacy_policy": "Política de Privacidad",
+        "rights_reserved": "Pathlight AI Inc. Todos los derechos reservados.",
+        "terms": "Términos",
+        "privacy": "Privacidad",
+        "cookies": "Cookies"
+    },
+    "dashboard": {
+        "welcome": "¡Bienvenido, {{name}}!",
+        "subtitle": "Elige tu consejero de IA y comienza una sesión personalizada.",
+        "choose_counselor": "Elige Tu Consejero",
+        "start_session": "Iniciar Sesión",
+        "coming_soon": "Próximamente",
+        "available": "24/7 Disponible",
+        "available_desc": "Conecta con tu consejero de IA en cualquier momento, día o noche",
+        "private": "100% Privado",
+        "private_desc": "Tus conversaciones son completamente confidenciales",
+        "personalized": "Personalizado",
+        "personalized_desc": "Apoyo a medida basado en tus necesidades únicas",
+        "sidebar": {
+            "counseling": "Consejería",
+            "history": "Historial de Sesiones",
+            "settings": "Ajustes",
+            "sign_out": "Cerrar Sesión"
+        },
+        "header": {
+            "title": "Sesión de Consejería con IA"
+        }
+    },
+    "auth": {
+        "create_account": "Crear una cuenta",
+        "join_today": "Únete a Pathlight hoy y comienza tu viaje.",
+        "student": "Estudiante",
+        "school_admin": "Admin Escolar",
+        "full_name": "Nombre Completo",
+        "email": "Correo Electrónico",
+        "password": "Contraseña",
+        "create_account_btn": "Crear Cuenta",
+        "creating_account": "Creando Cuenta...",
+        "already_have_account": "¿Ya tienes una cuenta?",
+        "sign_in": "Iniciar sesión",
+        "sign_up_free": "Regístrate gratis",
+        "welcome_back": "Bienvenido de nuevo",
+        "enter_details": "Por favor ingresa tus detalles para iniciar sesión.",
+        "remember_me": "Recuérdame",
+        "forgot_password": "¿Olvidaste tu contraseña?",
+        "signing_in": "Iniciando sesión...",
+        "dont_have_account": "¿No tienes una cuenta?",
+        "join_community": "Únete a la Comunidad",
+        "partner_with_us": "Asóciate con Nosotros",
+        "start_journey": "Comienza tu viaje de bienestar hoy.",
+        "transform_school": "Transforma el apoyo a la salud mental de tu escuela.",
+        "student_access": "Obtén acceso instantáneo a consejeros de IA, herramientas personalizadas y una comunidad de apoyo.",
+        "school_access": "Únete a una red de escuelas con visión de futuro que priorizan el bienestar estudiantil con tecnología avanzada.",
+        "ai_powered": "Soporte Impulsado por IA",
+        "admin_dashboard_visual": "Panel de Administración",
+        "personal_icon": "Tu ICONO personal para el bienestar mental.",
+        "empower_school": "Empodera a tu escuela con información basada en datos.",
+        "join_thousands": "Únete a miles de estudiantes que usan Pathlight para navegar la escuela, el estrés y la vida con confianza.",
+        "monitor_wellbeing": "Monitorea tendencias de bienestar estudiantil, gestiona recursos y asegura que ningún estudiante se quede atrás.",
+        "features_student": {
+            "free": "Gratis para Estudiantes",
+            "private": "Privado y Confidencial",
+            "instant": "Acceso Instantáneo",
+            "counseling": "Consejería de IA 24/7",
+            "anam": "100% Anónimo y Seguro",
+            "plans": "Planes de Crecimiento Personalizados"
+        },
+        "features_school": {
+            "implementation": "Implementación Fácil",
+            "compliance": "Cumplimiento Total",
+            "support": "Soporte Dedicado",
+            "analytics": "Analíticas en Tiempo Real",
+            "crisis": "Sistema de Alerta de Crisis",
+            "resource": "Gestión de Recursos"
+        }
+    }
+}
