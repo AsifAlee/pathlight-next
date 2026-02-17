@@ -22,9 +22,9 @@ import { Role } from "@/types";
 const AVATARS = [
   {
     id: 1,
-    name: "Mia",
+    name: "Emily",
     role: "The empathetic Guide",
-    image: "/mia.png",
+    image: "/emily.png",
     desc: "Your personal career counselor, ready to help you discover your path.",
     color: "bg-blue-500"
   },

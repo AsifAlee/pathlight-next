@@ -215,7 +215,7 @@ export default function VideoCallInterface({ onEndCall, personaConfig }: VideoCa
                                 <div className="text-center">
                                     <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden ring-4 ring-orange-500 shadow-2xl">
                                         <img
-                                            src="/mia.png"
+                                            src="/emily.png"
                                             alt="AI Career Counselor"
                                             className="w-full h-full object-cover"
                                         />
