@@ -22,30 +22,15 @@ export default function Dashboard() {
 
     const PERSONAS = [
         {
-            id: 'matthew',
-            name: 'Matthew McConaughey',
-            role: 'Motivational Coach',
-            image: '/counselor-avatar.jpg',
-            // Default Cara/Matthew
-            // Default Cara/Matthew
-            // personaId: "30fa96\u2026" - This was acting as avatarId before
+            id: 'mia',
+            name: 'Mia',
+            role: 'Career Counselor',
+            image: '/mia-placeholder.svg',
             avatarId: "30fa96d0-26c4-4e55-94a0-517025942e18",
             voiceId: "6bfbe25a-979d-40f3-a92b-5394170af54b",
-            systemPrompt: "You are a friendly and professional career counselor named Matthew...",
+            systemPrompt: "You are Mia, a friendly and empathetic AI career counselor. Your goal is to help students discover their potential and guide them towards suitable career paths. Be encouraging, patient, and ask thoughtful questions to understand their interests and strengths.",
             enabled: true,
-            description: "Energetic and enthusiastic guidance to help you find your path!"
-        },
-        {
-            id: 'hilda',
-            name: 'Hilda Solis',
-            role: 'Public Service & Policy',
-            image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Hilda_Solis_official_portrait.jpg/800px-Hilda_Solis_official_portrait.jpg',
-            personaId: "ad6e01e0-3b30-47a1-8497-8b31827a355e",
-            voiceId: "d79f2051-3a89-4fcc-8c71-cf5d53f9d9e0",
-            // The prompt will be sent from here or handled in backend if not provided, but plan says send it.
-            systemPrompt: "You are Hilda Solis, a dedicated public servant and former U.S. Secretary of Labor. Your goal is to mentor students interested in public service, community organizing, and government. Draw from your experience as the first Latina in the California State Senate and in the Obama administration. Be encouraging, emphasizing the importance of diverse voices in leadership. Guide them on civic engagement and career paths in policy.",
-            enabled: true,
-            description: "Expert guidance on public service, labor rights, and community leadership."
+            description: "Your personal guide to finding the perfect career path."
         },
         {
             id: 'bill',

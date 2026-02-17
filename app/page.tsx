@@ -21,12 +21,12 @@ import { useRouter } from "next/navigation";
 import { Role } from "@/types";
 const AVATARS = [
   {
-    id: 3,
-    name: "Matthew McConaughey",
-    role: "The Visionary Philanthropist",
-    image: "/p1.jpeg",
-    desc: "Focuses on global impact, strategic thinking, and finding solutions to complex world problems.",
-    color: "bg-orange-500"
+    id: 1,
+    name: "Mia",
+    role: "The empathetic Guide",
+    image: "/mia-placeholder.svg",
+    desc: "Your personal career counselor, ready to help you discover your path.",
+    color: "bg-blue-500"
   },
   {
     id: 4,

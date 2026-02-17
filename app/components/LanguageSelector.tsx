@@ -5,10 +5,13 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Globe, Check } from "lucide-react";
 
+import { usePathname } from "next/navigation";
+
 export default function LanguageSelector() {
     const { i18n } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
     const [mounted, setMounted] = useState(false);
+    const pathname = usePathname();
 
     useEffect(() => {
         setMounted(true);
@@ -23,7 +26,7 @@ export default function LanguageSelector() {
         if (token && !languageSelected) {
             setIsOpen(true);
         }
-    }, []);
+    }, [pathname]);
 
     const languages = [
         { code: "en", label: "English", flag: "🇺🇸" },
