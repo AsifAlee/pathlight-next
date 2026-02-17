@@ -25,7 +25,7 @@ export default function Dashboard() {
             id: 'mia',
             name: 'Mia',
             role: 'Career Counselor',
-            image: '/mia.jpg',
+            image: '/mia.png',
             avatarId: "edf6fdcb-acab-44b8-b974-ded72665ee26",
             voiceId: "6bfbe25a-979d-40f3-a92b-5394170af54b",
             systemPrompt: "You are Mia, a friendly and empathetic AI career counselor. Your goal is to help students discover their potential and guide them towards suitable career paths. Be encouraging, patient, and ask thoughtful questions to understand their interests and strengths.",
