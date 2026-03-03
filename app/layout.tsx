@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 };
 
 import LanguageSelector from "./components/LanguageSelector";
+import AnalyticsProvider from "./components/AnalyticsProvider";
 
 export default function RootLayout({
   children,
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body>
         <Toaster position="top-center" />
         <LanguageSelector />
+        <AnalyticsProvider />
         {children}
       </body>
     </html>

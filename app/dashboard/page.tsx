@@ -5,15 +5,17 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Logo } from "../components/Logo";
 import toast from "react-hot-toast";
-import { LogOut, User, Video, Settings, History, Notebook, Phone } from "lucide-react";
+import { LogOut, User, Video, Settings, History, Notebook, BarChart2 } from "lucide-react";
 import AnamVideoCallInterface from "../components/AnamVideoCallInterface";
 import NotesSidebar from "../components/NotesSidebar";
 import { useTranslation } from 'react-i18next';
 import '../i18n';
+import { useAnalytics } from "@/lib/useAnalytics";
 
 export default function Dashboard() {
     const { t, i18n } = useTranslation();
     const router = useRouter();
+    const { trackEvent } = useAnalytics();
     const [user, setUser] = useState<{ name: string; email: string; role: string } | null>(null);
     const [loading, setLoading] = useState(true);
     const [callActive, setCallActive] = useState(false);
@@ -103,13 +105,17 @@ export default function Dashboard() {
     };
 
     const startCall = (persona?: any) => {
+        const activePersona = persona || selectedPersona;
         if (persona) {
             setSelectedPersona(persona);
+            trackEvent('counselor_selected', { counselor: persona.name, personaId: persona.id });
         }
+        trackEvent('session_start', { counselor: activePersona?.name || 'Unknown' });
         setCallActive(true);
     };
 
     const endCall = () => {
+        trackEvent('session_end', { counselor: selectedPersona?.name || 'Unknown' });
         setCallActive(false);
     };
 
@@ -142,6 +148,10 @@ export default function Dashboard() {
                         <History size={20} />
                         {t('dashboard.sidebar.history')}
                     </a>
+                    <Link href="/analytics" className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-orange-50 hover:text-orange-600 rounded-xl font-medium transition-colors">
+                        <BarChart2 size={20} />
+                        Analytics
+                    </Link>
                     <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-xl font-medium transition-colors">
                         <Settings size={20} />
                         {t('dashboard.sidebar.settings')}

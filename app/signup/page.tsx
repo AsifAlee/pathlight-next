@@ -8,11 +8,13 @@ import { Logo } from "../components/Logo";
 import { ArrowRight, Mail, Lock, School, User, CheckCircle, UserCircle, Eye, EyeOff } from "lucide-react";
 import { useTranslation } from 'react-i18next';
 import '../i18n';
+import { useAnalytics } from '@/lib/useAnalytics';
 
 function SignUpContent() {
     const { t } = useTranslation();
     const searchParams = useSearchParams();
     const router = useRouter();
+    const { trackEvent } = useAnalytics();
     const initialType = searchParams.get('type') === 'school' ? 'school' : 'student';
     const [userType, setUserType] = useState<'student' | 'school'>(initialType);
     const [name, setName] = useState("");
@@ -46,6 +48,7 @@ function SignUpContent() {
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
 
+            trackEvent('signup', { role: userType });
             toast.success("Account created successfully! Please sign in.");
 
             // Redirect to signin

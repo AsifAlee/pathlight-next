@@ -8,11 +8,13 @@ import { Logo } from "../components/Logo";
 import { ArrowRight, Mail, Lock, School, User, CheckCircle, Eye, EyeOff } from "lucide-react";
 import { useTranslation } from 'react-i18next';
 import '../i18n';
+import { useAnalytics } from '@/lib/useAnalytics';
 
 function SignInContent() {
     const { t } = useTranslation();
     const searchParams = useSearchParams();
     const router = useRouter();
+    const { trackEvent } = useAnalytics();
     const initialType = searchParams.get('type') === 'school' ? 'school' : 'student';
     const [userType, setUserType] = useState<'student' | 'school'>(initialType);
     const [email, setEmail] = useState("");
@@ -45,6 +47,7 @@ function SignInContent() {
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
 
+            trackEvent('signin', { role: data.user?.role || userType });
             toast.success("Successfully signed in!");
 
             // Redirect to home page
