@@ -148,10 +148,12 @@ export default function Dashboard() {
                         <History size={20} />
                         {t('dashboard.sidebar.history')}
                     </a>
-                    <Link href="/analytics" className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-orange-50 hover:text-orange-600 rounded-xl font-medium transition-colors">
-                        <BarChart2 size={20} />
-                        Analytics
-                    </Link>
+                    {user?.role === 'admin' && (
+                        <Link href="/admin/dashboard" className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-orange-50 hover:text-orange-600 rounded-xl font-medium transition-colors">
+                            <BarChart2 size={20} />
+                            Admin Dashboard
+                        </Link>
+                    )}
                     <a href="#" className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-xl font-medium transition-colors">
                         <Settings size={20} />
                         {t('dashboard.sidebar.settings')}

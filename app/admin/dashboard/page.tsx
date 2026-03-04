@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Logo } from "../components/Logo";
+import { Logo } from "../../components/Logo";
+import toast from "react-hot-toast";
 import {
     BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid,
     Tooltip, ResponsiveContainer, Legend
@@ -78,14 +79,42 @@ export default function AnalyticsPage() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        fetchAnalytics();
-    }, []);
+        const userStr = localStorage.getItem("user");
+        const token = localStorage.getItem("token");
 
-    const fetchAnalytics = async () => {
+        if (!userStr || !token) {
+            router.push("/signin");
+            return;
+        }
+
+        try {
+            const user = JSON.parse(userStr);
+            if (user.role !== "admin") {
+                toast.error("Access denied: Admins only");
+                router.push("/dashboard");
+                return;
+            }
+            fetchAnalytics(token);
+        } catch (e) {
+            router.push("/signin");
+        }
+    }, [router]);
+
+    const fetchAnalytics = async (token: string) => {
         try {
             setLoading(true);
-            const res = await fetch("/api/analytics/summary");
-            if (!res.ok) throw new Error("Failed to fetch analytics");
+            const res = await fetch("/api/analytics/summary", {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (!res.ok) {
+                if (res.status === 401 || res.status === 403) {
+                    router.push("/dashboard");
+                    return;
+                }
+                throw new Error("Failed to fetch analytics");
+            }
             const json = await res.json();
             setData(json);
         } catch (e: any) {
@@ -119,7 +148,10 @@ export default function AnalyticsPage() {
                     <Activity size={48} className="text-red-400 mx-auto mb-4" />
                     <p className="text-slate-700 font-semibold text-lg mb-4">Failed to load analytics</p>
                     <p className="text-slate-500 text-sm mb-6">{error}</p>
-                    <button onClick={fetchAnalytics} className="bg-orange-500 text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-orange-600 transition-colors">
+                    <button onClick={() => {
+                        const token = localStorage.getItem("token");
+                        if (token) fetchAnalytics(token);
+                    }} className="bg-orange-500 text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-orange-600 transition-colors">
                         Retry
                     </button>
                 </div>
@@ -144,11 +176,11 @@ export default function AnalyticsPage() {
                 <nav className="px-4 space-y-2 mt-2 flex-1">
                     <Link href="/dashboard" className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-xl font-medium transition-colors">
                         <Video size={20} />
-                        Counseling
+                        User Dashboard
                     </Link>
-                    <Link href="/analytics" className="flex items-center gap-3 px-4 py-3 bg-orange-50 text-orange-600 rounded-xl font-medium">
+                    <Link href="/admin/dashboard" className="flex items-center gap-3 px-4 py-3 bg-orange-50 text-orange-600 rounded-xl font-medium">
                         <BarChart2 size={20} />
-                        Analytics
+                        Admin Analytics
                     </Link>
                 </nav>
 
@@ -177,7 +209,10 @@ export default function AnalyticsPage() {
                         </div>
                     </div>
                     <button
-                        onClick={fetchAnalytics}
+                        onClick={() => {
+                            const token = localStorage.getItem("token");
+                            if (token) fetchAnalytics(token);
+                        }}
                         className="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-orange-600 bg-slate-50 hover:bg-orange-50 border border-slate-200 hover:border-orange-200 px-4 py-2 rounded-xl transition-all"
                     >
                         <Zap size={15} />
@@ -288,7 +323,7 @@ export default function AnalyticsPage() {
                             <h3 className="text-base font-bold text-slate-900 mb-5">Top Event Types</h3>
                             {topEvents.length > 0 ? (
                                 <div className="space-y-3">
-                                    {topEvents.map((e, i) => {
+                                    {topEvents.map((e: { event: string; count: number }, i: number) => {
                                         const max = topEvents[0]?.count || 1;
                                         const pct = Math.round((e.count / max) * 100);
                                         return (
@@ -334,7 +369,7 @@ export default function AnalyticsPage() {
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-slate-50">
-                                            {recentEvents.map((ev) => (
+                                            {recentEvents.map((ev: any) => (
                                                 <tr key={ev._id} className="hover:bg-slate-50 transition-colors">
                                                     <td className="py-2.5 pl-2">
                                                         <span

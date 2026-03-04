@@ -1,10 +1,31 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import jwt from 'jsonwebtoken';
 import dbConnect from '@/lib/dbConnect';
 import AnalyticsEvent from '@/models/AnalyticsEvent';
 import User from '@/models/User';
 
-export async function GET() {
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+
+export async function GET(req: NextRequest) {
     try {
+        // Auth check
+        const authHeader = req.headers.get('authorization');
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
+        const token = authHeader.split(' ')[1];
+        let decoded: any;
+        try {
+            decoded = jwt.verify(token, JWT_SECRET);
+        } catch (e) {
+            return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+        }
+
+        if (decoded.user?.role !== 'admin') {
+            return NextResponse.json({ error: 'Forbidden: Admins only' }, { status: 403 });
+        }
+
         await dbConnect();
 
         const now = new Date();
