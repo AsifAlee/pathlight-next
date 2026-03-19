@@ -66,7 +66,7 @@ function VerifyEmailContent() {
                 <h1 className="text-3xl font-bold text-slate-900 mb-4">Verify your email</h1>
                 <p className="text-slate-600 mb-8">
                     We've sent a verification link to <span className="font-semibold text-slate-900">{email || 'your email'}</span>. 
-                    Please click the link in the email to activate your account.
+                    Please click the link in the email to activate your account. If you don't see the email, please check your spam folder.
                 </p>
 
                 <div className="space-y-4">

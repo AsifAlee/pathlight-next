@@ -66,7 +66,7 @@ function SignUpContent() {
             localStorage.removeItem('user');
 
             trackEvent('signup', { role: userType });
-            toast.success("Account created! Please check your email to verify.");
+            toast.success("Account created! Please check your email to verify. Check your spam folder if you don't see it.");
 
             // Redirect to verify-email page
             router.push(`/verify-email?email=${encodeURIComponent(email)}`);

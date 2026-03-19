@@ -205,7 +205,7 @@
         "sending_link": "Sending Link...",
         "back_to_login": "Back to login",
         "email_sent_title": "Check your email",
-        "email_sent_desc": "We've sent a password reset link to {{email}}",
+        "email_sent_desc": "We've sent a password reset link to {{email}}. If you don't see it, please check your spam folder.",
         "reset_password_title": "Reset Password",
         "reset_password_desc": "Please enter your new password below.",
         "new_password": "New Password",

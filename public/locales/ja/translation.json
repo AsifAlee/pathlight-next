@@ -205,7 +205,7 @@
         "sending_link": "送信中...",
         "back_to_login": "ログインに戻る",
         "email_sent_title": "メールを確認してください",
-        "email_sent_desc": "パスワード再設定用のリンクを {{email}} に送信しました。",
+        "email_sent_desc": "パスワード再設定用のリンクを {{email}} に送信しました。メールが届かない場合は、迷惑メールフォルダを確認してください。",
         "reset_password_title": "パスワードをリセット",
         "reset_password_desc": "新しいパスワードを入力してください。",
         "new_password": "新しいパスワード",
