@@ -6,82 +6,39 @@ import User from '@/models/User';
 
 export async function POST(request) {
     try {
-        const { email, password } = await request.json();
+        const { email, firebaseUid } = await request.json();
 
         const emailLower = email.toLowerCase().trim();
-        const passwordTrim = password.trim();
 
-        // Hardcoded school login
-        if (emailLower === 'usc@gmail.com' && passwordTrim === 'usc9987/.,') {
-            const payload = {
-                user: {
-                    id: 'school-admin-001',
-                    role: 'school'
-                }
-            };
-
-            const options = {
-                expiresIn: process.env.JWT_EXPIRY || '7d'
-            };
-
-            const token = jwt.sign(
-                payload,
-                process.env.JWT_SECRET || 'your-secret-key',
-                options
-            );
-
-            return NextResponse.json({
-                token,
-                user: {
-                    id: 'school-admin-001',
-                    name: 'USC School Admin',
-                    email: 'usc@gmail.com',
-                    role: 'school'
-                }
-            });
+        // Hardcoded school login (keep for now or migrate to firebase)
+        if (emailLower === 'usc@gmail.com' && !firebaseUid) {
+            // ... original hardcoded logic could stay here if needed for testing
+            // But we prefer Firebase now.
         }
 
-        // Student login (database)
         await dbConnect();
 
-        const user = await User.findOne({ email: emailLower });
+        let user = await User.findOne({ 
+            $or: [
+                { email: emailLower },
+                { firebaseUid: firebaseUid }
+            ]
+        });
+
         if (!user) {
             return NextResponse.json(
-                { message: 'Invalid Credentials' },
-                { status: 400 }
+                { message: 'User profile not found in database. Please sign up.' },
+                { status: 404 }
             );
         }
 
-        // Check password
-        const isMatch = await bcrypt.compare(passwordTrim, user.password);
-        if (!isMatch) {
-            return NextResponse.json(
-                { message: 'Invalid Credentials' },
-                { status: 400 }
-            );
+        // Update firebaseUid if missing
+        if (firebaseUid && !user.firebaseUid) {
+            user.firebaseUid = firebaseUid;
+            await user.save();
         }
-
-        // Create JWT payload
-        const payload = {
-            user: {
-                id: user._id,
-                role: user.role
-            }
-        };
-
-        // Sign token
-        const options = {
-            expiresIn: process.env.JWT_EXPIRY || '7d'
-        };
-
-        const token = jwt.sign(
-            payload,
-            process.env.JWT_SECRET,
-            options
-        );
 
         return NextResponse.json({
-            token,
             user: {
                 id: user._id,
                 name: user.name,

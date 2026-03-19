@@ -18,7 +18,6 @@ const UserSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true, 'Please provide a password'],
         minlength: [6, 'Password must be at least 6 characters']
     },
     role: {
@@ -29,6 +28,11 @@ const UserSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    firebaseUid: {
+        type: String,
+        unique: true,
+        sparse: true
     }
 });
 

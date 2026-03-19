@@ -45,7 +45,7 @@ export default function TranscriptsPage() {
 
         try {
             const user = JSON.parse(userStr);
-            console.log('user is:', user)
+            // console.log('user is:', user)
             if (user.role !== "admin") {
                 toast.error("Access denied: Admins only");
                 router.push("/dashboard");

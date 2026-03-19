@@ -29,22 +29,38 @@ function SignInContent() {
         setLoading(true);
 
         try {
+            const { auth } = await import('@/lib/firebase');
+            const { signInWithEmailAndPassword, signOut } = await import('firebase/auth');
+
+            // 1. Sign in with Firebase
+            const userCredential = await signInWithEmailAndPassword(auth, email.trim(), password.trim());
+            const firebaseUser = userCredential.user;
+
+            // 2. Check email verification
+            if (!firebaseUser.emailVerified) {
+                await signOut(auth);
+                throw new Error("Please verify your email address before signing in.");
+            }
+
+            // 3. Get user metadata from MongoDB
             const res = await fetch('/api/auth/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email: email.trim(), password: password.trim() }),
+                body: JSON.stringify({ 
+                    email: email.trim(),
+                    firebaseUid: firebaseUser.uid
+                }),
             });
 
             const data = await res.json();
 
             if (!res.ok) {
-                throw new Error(data.message || 'Something went wrong');
+                throw new Error(data.message || 'Something went wrong while retrieving profile');
             }
 
-            // Store token and user info
-            localStorage.setItem('token', data.token);
+            // Store info
             localStorage.setItem('user', JSON.stringify(data.user));
 
             trackEvent('signin', { role: data.user?.role || userType });
@@ -54,7 +70,9 @@ function SignInContent() {
             router.push('/');
 
         } catch (err: any) {
+            console.error('Signin error:', err);
             setError(err.message);
+            toast.error(err.message);
         } finally {
             setLoading(false);
         }
@@ -151,7 +169,7 @@ function SignInContent() {
                                 <input type="checkbox" className="w-4 h-4 rounded border-slate-300 text-orange-600 focus:ring-orange-500" />
                                 <span className="text-slate-600">{t('auth.remember_me')}</span>
                             </label>
-                            <a href="#" className="text-orange-600 font-medium hover:text-orange-700">{t('auth.forgot_password')}</a>
+                            <Link href="/forgot-password" className="text-orange-600 font-medium hover:text-orange-700">{t('auth.forgot_password')}</Link>
                         </div>
 
                         <button

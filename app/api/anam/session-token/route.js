@@ -9,7 +9,7 @@ export async function POST(request) {
     }
 
     const ANAM_API_KEY = process.env.NEXT_PUBLIC_ANAM_API_KEY;
-    console.log("ANAM_API_KEY", ANAM_API_KEY);
+    // console.log("ANAM_API_KEY", ANAM_API_KEY);
 
     if (!ANAM_API_KEY) {
       return NextResponse.json(

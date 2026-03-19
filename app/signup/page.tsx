@@ -30,32 +30,51 @@ function SignUpContent() {
         setLoading(true);
 
         try {
+            // Import dynamically to avoid SSR issues if firebase is client-only
+            const { auth } = await import('@/lib/firebase');
+            const { createUserWithEmailAndPassword, sendEmailVerification, signOut } = await import('firebase/auth');
+
+            // 1. Create user in Firebase
+            const userCredential = await createUserWithEmailAndPassword(auth, email.trim(), password.trim());
+            const firebaseUser = userCredential.user;
+
+            // 2. Send verification email
+            await sendEmailVerification(firebaseUser);
+
+            // 3. Save additional metadata in MongoDB
             const res = await fetch('/api/auth/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name: name.trim(), email: email.trim(), password: password.trim(), role: userType }),
+                body: JSON.stringify({ 
+                    name: name.trim(), 
+                    email: email.trim(), 
+                    role: userType,
+                    firebaseUid: firebaseUser.uid
+                }),
             });
 
             const data = await res.json();
 
             if (!res.ok) {
-                throw new Error(data.message || 'Something went wrong');
+                throw new Error(data.message || 'Something went wrong while saving profile');
             }
 
-            // Store token and user info
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
+            // Sign out because we want them to verify first
+            await signOut(auth);
+            localStorage.removeItem('user');
 
             trackEvent('signup', { role: userType });
-            toast.success("Account created successfully! Please sign in.");
+            toast.success("Account created! Please check your email to verify.");
 
-            // Redirect to signin
-            router.push(`/signin?type=${userType}`);
+            // Redirect to verify-email page
+            router.push(`/verify-email?email=${encodeURIComponent(email)}`);
 
         } catch (err: any) {
+            console.error('Signup error:', err);
             setError(err.message);
+            toast.error(err.message);
         } finally {
             setLoading(false);
         }

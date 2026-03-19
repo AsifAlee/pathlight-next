@@ -188,7 +188,7 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
         } catch (err: any) {
             // Ignore abort errors
             if (err.name === 'AbortError') {
-                console.log("Anam call aborted");
+                // console.log("Anam call aborted");
                 return;
             }
 
