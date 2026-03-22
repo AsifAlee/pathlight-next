@@ -30,27 +30,35 @@ const AVATARS = [
   },
   {
     id: 4,
-    name: "Elon Musk",
-    role: "The Innovation Catalyst",
-    image: "/elon.jpg",
-    desc: "Focuses on disruptive technology, future-building, and pushing the boundaries of what's possible.",
+    name: "Anee",
+    role: "The Excellence Advocate",
+    image: "/anne.png",
+    desc: "Focuses on sales excellence, customer acquisition, and achieving business growth.",
     color: "bg-amber-600"
   },
   {
     id: 5,
-    name: "J.K. Rowling",
-    role: "The Creative Storyteller",
-    image: "/jk-rowling.jpg",
-    desc: "Focuses on narrative, imagination, and building resilience through the power of story.",
+    name: "Mia",
+    role: "The Support Specialist",
+    image: "/mia.png",
+    desc: "Focuses on providing exceptional support and ensuring customer satisfaction.",
     color: "bg-yellow-500"
   },
   {
     id: 6,
-    name: "Jeff Bezos",
-    role: "The Customer Obsession Expert",
-    image: "/jeff-bezos.jpg",
-    desc: "Focuses on long-term thinking, operational excellence, and relentless innovation.",
+    name: "Kevin",
+    role: "The Language Mentor",
+    image: "/kevin.png",
+    desc: "Focuses on language mastery and cross-cultural communication training.",
     color: "bg-orange-600"
+  },
+  {
+    id: 7,
+    name: "Richard",
+    role: "The Strategic Negotiator",
+    image: "/richard.png",
+    desc: "Focuses on advanced negotiation techniques and conflict resolution strategies.",
+    color: "bg-red-500"
   }
 ];
 export default function Home() {
@@ -70,6 +78,10 @@ export default function Home() {
   };
 
   const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("languageSelected");
+    setIsAuthenticated(false);
     setCurrentRole(null);
     setActivePage('home');
   };
@@ -105,38 +117,6 @@ export default function Home() {
     }
   };
 
-  if (currentRole) {
-    return (
-      <>
-        {/* Navigation for Dashboard */}
-        <nav className=" test-style fixed w-full z-50 bg-white border-b border-orange-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-16 items-center">
-              <div className="flex items-center gap-2 cursor-pointer" onClick={() => setCurrentRole(null)}>
-                <div className="text-primary">
-                  <Logo className="w-8 h-8" />
-                </div>
-
-              </div>
-              <div className="flex items-center gap-4">
-                <span className="text-sm text-slate-500 hidden sm:block">Logged in as {currentRole === 'student' ? 'Student' : 'Administrator'}</span>
-                <button
-                  onClick={handleLogout}
-                  className="text-sm font-medium text-slate-600 hover:text-primary px-3 py-2 rounded-lg hover:bg-orange-50"
-                >
-                  Logout
-                </button>
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-white font-bold shadow-md shadow-orange-200">
-                  {currentRole === 'student' ? 'S' : 'A'}
-                </div>
-              </div>
-            </div>
-          </div>
-        </nav>
-        {/* <Dashboard role={currentRole} userName={currentRole === 'student' ? 'Alex' : 'Principal Skinner'} /> */}
-      </>
-    );
-  }
 
   // Check for authentication on mount
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -148,11 +128,19 @@ export default function Home() {
 
   useEffect(() => {
     const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
-    if (!token) {
-      // router.push('/signin'); // Removed auto-redirect for landing page
-    } else {
+    const userData = typeof window !== 'undefined' ? localStorage.getItem("user") : null;
+    
+    if (token && userData) {
       setIsAuthenticated(true);
-      // setIsLoading(false); // Removed
+      try {
+        const user = JSON.parse(userData);
+        setCurrentRole(user.role);
+      } catch (e) {
+        console.error("Error parsing user data:", e);
+      }
+    } else {
+      setIsAuthenticated(false);
+      setCurrentRole(null);
     }
     setIsLoading(false);
   }, [router]);
@@ -175,7 +163,12 @@ export default function Home() {
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-primary/20">
 
       {/* Navbar */}
-      <Navbar onNavigate={navigateTo} onAuth={openAuth} />
+      <Navbar 
+        onNavigate={navigateTo} 
+        onAuth={openAuth} 
+        isAuthenticated={isAuthenticated} 
+        onLogout={handleLogout} 
+      />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden relative">

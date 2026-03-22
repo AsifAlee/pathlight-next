@@ -30,33 +30,53 @@ export default function Dashboard() {
             image: '/emily.png',
             avatarId: "bdaaedfa-00f2-417a-8239-8bb89adec682",
             voiceId: "6bfbe25a-979d-40f3-a92b-5394170af54b",
-            systemPrompt: "You are Emily, a friendly and empathetic AI career counselor. Your goal is to help students discover their potential and guide them towards suitable career paths. Be encouraging, patient, and ask thoughtful questions to understand their interests and strengths.",
+            systemPrompt: "You are Emily, a friendly and empathetic AI career counselor. Your goal is to help students discover their potential and guide them towards suitable career paths. At some point during the conversation, please naturally ask for their name, age, gender (male, female, or other), and where they want to be in the next 5 to 10 years. Be encouraging, patient, and ask thoughtful questions to understand their interests and strengths.",
             enabled: true,
             description: "Your personal guide to finding the perfect career path."
         },
         {
-            id: 'bill',
-            name: 'Bill Gates',
-            role: 'Tech & Innovation',
-            image: '/bill-gates.jpg',
-            enabled: false,
-            description: "Expert insights on technology and future trends. (Coming Soon)"
+            id: 'anee',
+            name: 'Anee',
+            role: 'Sale Agent',
+            image: '/anne.png',
+            avatarId: "27e12daa-50fc-4384-93c2-ebca73f1f78d",
+            voiceId: "4db410d9-0fe9-463a-9307-8285b697080f", // Reusing Emily's voice ID since not provided
+            systemPrompt: "You are Anee, a high-performing sales agent. Your goal is to help users understand the value of our products and services. At some point during the conversation, please naturally ask for their name, age, gender (male, female, or other), and where they want to be in the next 5 to 10 years to better tailor your pitch. Guide them through the sales process with expertise and persuasion.",
+            enabled: true,
+            description: "Expert in sales and customer acquisition strategies."
         },
         {
-            id: 'jeff',
-            name: 'Jeff Bezos',
-            role: 'Business Strategy',
-            image: '/jeff-bezos.jpg',
-            enabled: false,
-            description: "Mastering business scale and customer obsession. (Coming Soon)"
+            id: 'mia',
+            name: 'Mia',
+            role: 'Customer Support',
+            image: '/mia.png',
+            avatarId: "edf6fdcb-acab-44b8-b974-ded72665ee26",
+            voiceId: "df2aec93-4b4e-41f2-8d02-b2d615ce184a", // Reusing Emily's voice ID since not provided
+            systemPrompt: "You are Mia, a dedicated customer support specialist. Your goal is to provide exceptional support to our users. At some point during the conversation, please naturally ask for their name, age, gender (male, female, or other), and where they want to be in the next 5 to 10 years to understand their context better. Resolve their issues and answer their questions with patience and clarity.",
+            enabled: true,
+            description: "Dedicated to helping you with any questions or issues you may have."
         },
         {
-            id: 'elon',
-            name: 'Elon Musk',
-            role: 'Visionary',
-            image: '/elon.jpg',
-            enabled: false,
-            description: "Thinking big and solving hard problems. (Coming Soon)"
+            id: 'kevin',
+            name: 'Kevin',
+            role: 'Language Tutor',
+            image: '/kevin.png',
+            avatarId: "ccf00c0e-7302-455b-ace2-057e0cf58127",
+            voiceId: "13ba97ac-88e3-454f-8a49-6f9479dd4586", // Reusing Emily's voice ID since not provided
+            systemPrompt: "You are Kevin, a passionate language tutor. Your goal is to help users master new languages and understand different cultures. At some point during the conversation, please naturally ask for their name, age, gender (male, female, or other), and where they want to be in the next 5 to 10 years to customize the learning experience. Use engaging and effective teaching methods.",
+            enabled: true,
+            description: "Specializing in language learning and cross-cultural communication."
+        },
+        {
+            id: 'richard',
+            name: 'Richard',
+            role: 'Negotiator',
+            image: '/richard.png',
+            avatarId: "19d18eb0-5346-4d50-a77f-26b3723ed79d",
+            voiceId: "e9104cf7-d163-4f89-b01a-311f2e8943d0", // Reusing Emily's voice ID since not provided
+            systemPrompt: "You are Richard, a master negotiator. Your goal is to help users develop their negotiation skills and resolve conflicts effectively. At some point during the conversation, please naturally ask for their name, age, gender (male, female, or other), and where they want to be in the next 5 to 10 years to understand their long-term objectives. Ensure mutually beneficial outcomes.",
+            enabled: true,
+            description: "Mastering the art of negotiation and conflict resolution."
         }
     ];
 

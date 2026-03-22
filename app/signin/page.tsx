@@ -61,6 +61,8 @@ function SignInContent() {
             }
 
             // Store info
+            const token = await firebaseUser.getIdToken();
+            localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(data.user));
 
             trackEvent('signin', { role: data.user?.role || userType });

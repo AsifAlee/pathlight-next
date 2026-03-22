@@ -19,30 +19,38 @@ const AVATARS = [
     },
     {
         id: 4,
-        name: "Elon Musk",
-        role: "The Innovation Catalyst",
-        image: "/elon.jpg",
-        desc: "Focuses on disruptive technology, future-building, and pushing the boundaries of what's possible.",
+        name: "Anee",
+        role: "The Excellence Advocate",
+        image: "/anne.png",
+        desc: "Focuses on sales excellence, customer acquisition, and achieving business growth.",
         color: "bg-amber-600"
     },
     {
         id: 5,
-        name: "J.K. Rowling",
-        role: "The Creative Storyteller",
-        image: "/jk-rowling.jpg",
-        desc: "Focuses on narrative, imagination, and building resilience through the power of story.",
+        name: "Mia",
+        role: "The Support Specialist",
+        image: "/mia.png",
+        desc: "Focuses on providing exceptional support and ensuring customer satisfaction.",
         color: "bg-yellow-500"
     },
     {
         id: 6,
-        name: "Jeff Bezos",
-        role: "The Customer Obsession Expert",
-        image: "/jeff-bezos.jpg",
-        desc: "Focuses on long-term thinking, operational excellence, and relentless innovation.",
+        name: "Kevin",
+        role: "The Language Mentor",
+        image: "/kevin.png",
+        desc: "Focuses on language mastery and cross-cultural communication training.",
         color: "bg-orange-600"
     },
     {
         id: 7,
+        name: "Richard",
+        role: "The Strategic Negotiator",
+        image: "/richard.png",
+        desc: "Focuses on advanced negotiation techniques and conflict resolution strategies.",
+        color: "bg-red-500"
+    },
+    {
+        id: 8,
         name: "Naruto Uzumaki",
         role: "The Resilience Mentor",
         image: "/naruto_uzumaki.jpeg",
@@ -50,7 +58,7 @@ const AVATARS = [
         color: "bg-orange-400"
     },
     {
-        id: 8,
+        id: 9,
         name: "Monkey D. Luffy",
         role: "The Freedom Seeker",
         image: "/straw_hat_luffy.jpeg",
@@ -58,7 +66,7 @@ const AVATARS = [
         color: "bg-red-500"
     },
     {
-        id: 9,
+        id: 10,
         name: "Son Goku",
         role: "The Limit Breaker",
         image: "/sonuGoku.jpeg",
@@ -66,7 +74,7 @@ const AVATARS = [
         color: "bg-yellow-600"
     },
     {
-        id: 10,
+        id: 11,
         name: "Kakashi Hatake",
         role: "The Tactical Strategist",
         image: "/kakashi_hakate.jpeg",
@@ -74,7 +82,7 @@ const AVATARS = [
         color: "bg-blue-400"
     },
     {
-        id: 11,
+        id: 12,
         name: "Yami Yugi",
         role: "The Mental Fortitude Expert",
         image: "/yami_hugi.jpeg",
