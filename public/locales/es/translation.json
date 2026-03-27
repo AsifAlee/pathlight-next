@@ -11,7 +11,7 @@
     "nav": {
         "features": "Características",
         "how_it_works": "Cómo Funciona",
-        "guides": "Nuestros ÍCONOS",
+        "guides": "Nuestros CONSEJEROS",
         "dashboard": "Panel de Llamadas",
         "login": "Iniciar Sesión",
         "logout": "Cerrar Sesión",
@@ -22,19 +22,19 @@
         "hero": {
             "new_support": "Nuevo: Soporte en vivo 24/7",
             "title_prefix": "El Primer",
-            "title_suffix": "ÍCONO de Carrera con IA del Mundo.",
-            "description": "Experimenta el futuro de la salud mental y el apoyo profesional. Elige un ICONO que resuene contigo y obtén apoyo en tiempo real y sin juicios para la escuela, el estrés y la vida.",
+            "title_suffix": "CONSEJERO de Carrera con IA del Mundo.",
+            "description": "Experimenta el futuro de la salud mental y el apoyo profesional. Elige un CONSEJERO que resuene contigo y obtén apoyo en tiempo real y sin juicios para la escuela, el estrés y la vida.",
             "try_free": "Pruébalo Gratis",
             "see_features": "Ver Características",
-            "select_preview": "Selecciona tu ÍCONO para previsualizar",
+            "select_preview": "Selecciona tu CONSEJERO para previsualizar",
             "tap_to_chat": "Toca el botón de llamada para chatear",
-            "ai_icon": "ÍCONO IA"
+            "ai_icon": "CONSEJERO IA"
         },
         "trust": {
             "joining_forces": "Uniendo fuerzas con escuelas innovadoras"
         },
         "guides": {
-            "title": "Conoce a tus ICONS",
+            "title": "Conoce a tus CONSEJEROS",
             "description": "La salud mental no es talla única. Nuestra plataforma ofrece una gama de personalidades de IA modeladas según estilos reales de consejería.",
             "meet": "Conocer"
         },

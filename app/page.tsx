@@ -243,34 +243,33 @@ export default function Home() {
                         <div className="absolute bottom-0 left-0 w-full h-[3px] bg-primary"></div>
                       </div>
                       <div className="px-3 py-1.5 bg-slate-900/90 backdrop-blur-md flex items-center border-l border-white/5">
-                        <span className="text-sm font-bold text-white tracking-wide">AI ICON</span>
+                        <span className="text-sm font-bold text-white tracking-wide">AI COUNSELLORS</span>
                       </div>
                     </div>
                   </div>
 
-                </div>
+                  <div className="text-center space-y-6">
+                    <div className="space-y-1">
+                      <h3 className="text-white text-2xl font-bold">{activeAvatar.name}</h3>
+                      <p className="text-white/70 text-sm">{activeAvatar.role}</p>
+                    </div>
 
-                <div className="text-center space-y-6">
-                  <div className="space-y-1">
-                    <h3 className="text-white text-2xl font-bold">{activeAvatar.name}</h3>
-                    <p className="text-white/70 text-sm">{activeAvatar.role}</p>
+                    <div className="flex items-center justify-center gap-6">
+                      <button className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+                        <Mic size={20} />
+                      </button>
+                      <button
+                        onClick={() => openAuth('student', 'signup')}
+                        className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-orange-600 hover:from-orange-500 hover:to-primary text-white flex items-center justify-center shadow-xl shadow-orange-500/40 transform hover:scale-110 transition-all animate-[pulse_2s_infinite]"
+                      >
+                        <Phone size={32} className="fill-current" />
+                      </button>
+                      <button className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+                        <Video size={20} />
+                      </button>
+                    </div>
+                    <p className="text-white/50 text-xs">{t('home.hero.tap_to_chat')}</p>
                   </div>
-
-                  <div className="flex items-center justify-center gap-6">
-                    <button className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-colors">
-                      <Mic size={20} />
-                    </button>
-                    <button
-                      onClick={() => openAuth('student', 'signup')}
-                      className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-orange-600 hover:from-orange-500 hover:to-primary text-white flex items-center justify-center shadow-xl shadow-orange-500/40 transform hover:scale-110 transition-all animate-[pulse_2s_infinite]"
-                    >
-                      <Phone size={32} className="fill-current" />
-                    </button>
-                    <button className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-colors">
-                      <Video size={20} />
-                    </button>
-                  </div>
-                  <p className="text-white/50 text-xs">{t('home.hero.tap_to_chat')}</p>
                 </div>
               </div>
             </div>
