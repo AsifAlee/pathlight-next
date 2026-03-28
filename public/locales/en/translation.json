@@ -11,7 +11,7 @@
     "nav": {
         "features": "Features",
         "how_it_works": "How it Works",
-        "guides": "Our COUNSELLORS",
+        "guides": "Our COUNSELORS",
         "dashboard": "Call Dashboard",
         "login": "Login",
         "logout": "Logout",
@@ -22,19 +22,19 @@
         "hero": {
             "new_support": "New: Live 24/7 Support",
             "title_prefix": "The World's First",
-            "title_suffix": "AI Career COUNSELLOR.",
-            "description": "Experience the future of mental health and career support. Choose a COUNSELLOR that resonates with you and get real-time, judgment-free support for school, stress, and life.",
+            "title_suffix": "AI Career COUNSELOR.",
+            "description": "Experience the future of mental health and career support. Choose a COUNSELOR that resonates with you and get real-time, judgment-free support for school, stress, and life.",
             "try_free": "Try It Free",
             "see_features": "See Features",
-            "select_preview": "Select your COUNSELLOR to preview",
+            "select_preview": "Select your COUNSELOR to preview",
             "tap_to_chat": "Tap call button to start chat",
-            "ai_icon": "AI COUNSELLOR"
+            "ai_icon": "AI COUNSELOR"
         },
         "trust": {
             "joining_forces": "Joining forces with innovative schools"
         },
         "guides": {
-            "title": "Meet Your COUNSELLORS",
+            "title": "Meet Your COUNSELORS",
             "description": "Mental health isn't one-size-fits-all. Our platform offers a range of AI personalities modeled after real counseling styles.",
             "meet": "Meet"
         },
@@ -187,7 +187,7 @@
         "school_access": "Join a network of forward-thinking schools prioritizing student well-being with advanced technology.",
         "ai_powered": "AI-Powered Support",
         "admin_dashboard_visual": "Admin Dashboard",
-        "personal_icon": "Your personal COUNSELLOR to mental wellness.",
+        "personal_icon": "Your personal COUNSELOR to mental wellness.",
         "empower_school": "Empower your school with data-driven insights.",
         "join_thousands": "Join thousands of students using Pathlight to navigate school, stress, and life with confidence.",
         "monitor_wellbeing": "Monitor student well-being trends, manage resources, and ensure no student falls through the cracks.",

@@ -243,7 +243,7 @@ export default function Home() {
                         <div className="absolute bottom-0 left-0 w-full h-[3px] bg-primary"></div>
                       </div>
                       <div className="px-3 py-1.5 bg-slate-900/90 backdrop-blur-md flex items-center border-l border-white/5">
-                        <span className="text-sm font-bold text-white tracking-wide">AI COUNSELLORS</span>
+                        <span className="text-sm font-bold text-white tracking-wide">AI COUNSELORS</span>
                       </div>
                     </div>
                   </div>
