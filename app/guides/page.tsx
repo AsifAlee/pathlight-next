@@ -8,14 +8,13 @@ import { Logo } from "../components/Logo";
 import { ArrowLeft, Phone, Video, Mic } from "lucide-react";
 
 const AVATARS = [
-
     {
-        id: 3,
-        name: "Matthew McConaughey",
-        role: "The Visionary Philanthropist",
-        image: "/p1.jpeg",
-        desc: "Focuses on global impact, strategic thinking, and finding solutions to complex world problems.",
-        color: "bg-orange-500"
+        id: 1,
+        name: "Emily",
+        role: "The empathetic Guide",
+        image: "/emily.png",
+        desc: "Your personal career counselor, ready to help you discover your path.",
+        color: "bg-blue-500"
     },
     {
         id: 4,
@@ -48,46 +47,6 @@ const AVATARS = [
         image: "/richard.png",
         desc: "Focuses on advanced negotiation techniques and conflict resolution strategies.",
         color: "bg-red-500"
-    },
-    {
-        id: 8,
-        name: "Naruto Uzumaki",
-        role: "The Resilience Mentor",
-        image: "/naruto_uzumaki.jpeg",
-        desc: "Focuses on perseverance, never giving up on your dreams, and the power of friendship and hard work.",
-        color: "bg-orange-400"
-    },
-    {
-        id: 9,
-        name: "Monkey D. Luffy",
-        role: "The Freedom Seeker",
-        image: "/straw_hat_luffy.jpeg",
-        desc: "Focuses on pure ambition, the value of freedom, and protecting one's crew and dreams at all costs.",
-        color: "bg-red-500"
-    },
-    {
-        id: 10,
-        name: "Son Goku",
-        role: "The Limit Breaker",
-        image: "/sonuGoku.jpeg",
-        desc: "Focuses on continuous self-improvement, facing challenges with a smile, and protecting the innocent.",
-        color: "bg-yellow-600"
-    },
-    {
-        id: 11,
-        name: "Kakashi Hatake",
-        role: "The Tactical Strategist",
-        image: "/kakashi_hakate.jpeg",
-        desc: "Focuses on teamwork, calmness under pressure, and learning from past experiences to build a better future.",
-        color: "bg-blue-400"
-    },
-    {
-        id: 12,
-        name: "Yami Yugi",
-        role: "The Mental Fortitude Expert",
-        image: "/yami_hugi.jpeg",
-        desc: "Focuses on strategic brilliance, the heart of the cards (confidence), and overcoming inner shadows.",
-        color: "bg-purple-600"
     }
 ];
 
@@ -127,7 +86,7 @@ export default function GuidesPage() {
                             <ArrowLeft size={24} />
                         </button>
                         <div>
-                            <h1 className="text-4xl font-bold text-slate-900">Our AI ICONS</h1>
+                            <h1 className="text-4xl font-bold text-slate-900">Our AI COUNSELLORS</h1>
                             <p className="text-slate-600">Choose the perfect mentor for your journey.</p>
                         </div>
                     </div>
@@ -178,7 +137,7 @@ export default function GuidesPage() {
                                                     <div className="absolute bottom-0 left-0 w-full h-[3px] bg-primary"></div>
                                                 </div>
                                                 <div className="px-3 py-1.5 bg-slate-900/90 backdrop-blur-md flex items-center border-l border-white/5">
-                                                    <span className="text-sm font-bold text-white tracking-wide">AI ICON</span>
+                                                    <span className="text-sm font-bold text-white tracking-wide">AI COUNSELLOR</span>
                                                 </div>
                                             </div>
                                         </div>
