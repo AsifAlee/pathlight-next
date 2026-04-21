@@ -284,18 +284,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Intro Copy */}
-      <section className="py-14 border-t border-slate-200 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="max-w-5xl text-3xl lg:text-4xl font-bold leading-snug tracking-tight text-slate-950">
-            <span className="font-medium">for </span>College, Life<span className="font-medium">, and </span>What Comes Next
-          </h2>
-          <p className="mt-2 max-w-6xl text-2xl leading-snug text-slate-950">
-            Experience the future of career and academic support. Choose a counselor that resonates with you and get real-time, judgment-free guidance for school, stress, and life
-          </p>
-        </div>
-      </section>
-
       {/* NEW SECTION: Meet Your Guides (Interactive Showcase) */}
       <section id="guides" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
