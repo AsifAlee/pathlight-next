@@ -11,9 +11,9 @@ const AVATARS = [
 
     {
         id: 3,
-        name: "Matthew McConaughey",
+        name: "Richard",
         role: "The Visionary Philanthropist",
-        image: "/p1.jpeg",
+        image: "https://framerusercontent.com/images/BfxuDPCmM2NvopgMjexkKFqMgWc.webp",
         desc: "Focuses on global impact, strategic thinking, and finding solutions to complex world problems.",
         color: "bg-orange-500"
     },
@@ -27,19 +27,35 @@ const AVATARS = [
     },
     {
         id: 5,
-        name: "Mia",
+        name: "Liv",
         role: "The Support Specialist",
-        image: "/mia.png",
+        image: "https://framerusercontent.com/images/iSN4tzOGZv3SA1JxsPxwaXrL5l0.webp",
         desc: "Focuses on providing exceptional support and ensuring your satisfaction every step of the way.",
         color: "bg-orange-500"
     },
     {
         id: 6,
-        name: "Alex",
+        name: "Gabriel",
         role: "The Career Navigator",
-        image: "/counselor-avatar.jpg",
+        image: "https://framerusercontent.com/images/2joxVt7gAQwLX6k5yHxyQAVQ4k.webp",
         desc: "Focuses on long-term career planning, goal setting, and helping you find the right professional path.",
         color: "bg-orange-600"
+    },
+    {
+        id: 12,
+        name: "Mia",
+        role: "The Wellness Coach",
+        image: "https://framerusercontent.com/images/VbGAbBrrMidu4Y5YUJLd4PFJut0.webp",
+        desc: "Focuses on mental well-being, stress management, and building healthy habits for long-term success.",
+        color: "bg-pink-500"
+    },
+    {
+        id: 13,
+        name: "Anne",
+        role: "The Academic Advisor",
+        image: "https://framerusercontent.com/images/ZUmV5HVOgmnwp528GomIq6TMkA.webp",
+        desc: "Specializes in academic planning, study strategies, and helping students achieve their educational goals.",
+        color: "bg-purple-500"
     },
     {
         id: 7,
