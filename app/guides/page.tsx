@@ -19,26 +19,26 @@ const AVATARS = [
     },
     {
         id: 4,
-        name: "Elon Musk",
-        role: "The Innovation Catalyst",
-        image: "/elon.jpg",
-        desc: "Focuses on disruptive technology, future-building, and pushing the boundaries of what's possible.",
-        color: "bg-amber-600"
+        name: "Emily",
+        role: "The Empathetic Guide",
+        image: "/emily.png",
+        desc: "Your personal career counselor, ready to help you discover your path.",
+        color: "bg-blue-500"
     },
     {
         id: 5,
-        name: "J.K. Rowling",
-        role: "The Creative Storyteller",
-        image: "/jk-rowling.jpg",
-        desc: "Focuses on narrative, imagination, and building resilience through the power of story.",
-        color: "bg-yellow-500"
+        name: "Mia",
+        role: "The Support Specialist",
+        image: "/mia.png",
+        desc: "Focuses on providing exceptional support and ensuring your satisfaction every step of the way.",
+        color: "bg-orange-500"
     },
     {
         id: 6,
-        name: "Jeff Bezos",
-        role: "The Customer Obsession Expert",
-        image: "/jeff-bezos.jpg",
-        desc: "Focuses on long-term thinking, operational excellence, and relentless innovation.",
+        name: "Alex",
+        role: "The Career Navigator",
+        image: "/counselor-avatar.jpg",
+        desc: "Focuses on long-term career planning, goal setting, and helping you find the right professional path.",
         color: "bg-orange-600"
     },
     {
@@ -119,8 +119,8 @@ export default function GuidesPage() {
                             <ArrowLeft size={24} />
                         </button>
                         <div>
-                            <h1 className="text-4xl font-bold text-slate-900">Meet The Pathlight AI Counselors Who Get You</h1>
-                            <p className="text-slate-600">Guidance isn’t one-size-fits-all. Our platform offers Pathlight personalities inspired by real counseling styles — from the Coach and the Scholar to the Visionary, the Entrepreneur, and more.</p>
+                            <h1 className="text-4xl font-bold text-slate-900">Pathlight Counselors</h1>
+                            <p className="text-slate-600">Choose the Pathlight Counselor best suited to your academic and career path.</p>
                         </div>
                     </div>
 
@@ -201,8 +201,8 @@ export default function GuidesPage() {
                                 </div>
 
                                 <div className="mt-8 p-6 bg-orange-50 rounded-3xl border border-orange-100">
-                                    <h4 className="font-bold text-slate-900 mb-2">Meet The Pathlight AI Counselors Who Get You</h4>
-                                    <p className="text-slate-600 text-sm leading-relaxed">Guidance isn’t one-size-fits-all. Our platform offers Pathlight personalities inspired by real counseling styles — from the Coach and the Scholar to the Visionary, the Entrepreneur, and more.</p>
+                                    <h4 className="font-bold text-slate-900 mb-2">Pathlight Counselors</h4>
+                                    <p className="text-slate-600 text-sm leading-relaxed">Choose the Pathlight Counselor best suited to your academic and career path.</p>
                                 </div>
                             </div>
                         </div>
