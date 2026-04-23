@@ -28,6 +28,15 @@ function SignInContent() {
         setError("");
         setLoading(true);
 
+        // Hardcoded demo user bypass
+        if (email.trim().toLowerCase() === 'chapman@pathlightedu.org' && password.trim() === 'chapman009@') {
+            localStorage.setItem('user', JSON.stringify({ id: 'demo-chapman', name: 'Chapman', email: 'chapman@pathlightedu.org', role: 'student' }));
+            toast.success("Successfully signed in!");
+            router.push('/');
+            setLoading(false);
+            return;
+        }
+
         try {
             const { auth } = await import('@/lib/firebase');
             const { signInWithEmailAndPassword, signOut } = await import('firebase/auth');
