@@ -21,6 +21,14 @@ import { useRouter } from "next/navigation";
 import { Role } from "@/types";
 const AVATARS = [
   {
+    id: 0,
+    name: "Emily",
+    role: "The Empathetic Guide",
+    image: "/emily.png",
+    desc: "Your personal career counselor, ready to help you discover your path.",
+    color: "bg-blue-500"
+  },
+  {
     id: 1,
     name: "Richard",
     role: "The Empathetic Guide",
