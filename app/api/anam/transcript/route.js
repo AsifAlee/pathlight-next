@@ -1,11 +1,17 @@
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 import dbConnect from "../../../../lib/dbConnect";
 import Transcript from "../../../../models/Transcript";
 import User from "../../../../models/User";
 
-// Secret for JWT
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
+const getJwtSecret = () => {
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+        throw new Error("JWT_SECRET is not configured");
+    }
+    return secret;
+};
 
 export async function POST(req) {
     try {
@@ -22,7 +28,7 @@ export async function POST(req) {
         const token = authHeader.split(" ")[1];
         let decoded;
         try {
-            decoded = jwt.verify(token, JWT_SECRET);
+            decoded = jwt.verify(token, getJwtSecret());
         } catch (err) {
             return NextResponse.json(
                 { success: false, message: "Unauthorized: Invalid or expired token" },
@@ -41,12 +47,13 @@ export async function POST(req) {
             );
         }
 
-        // Check if user exists to get the email
-        const user = await User.findById(decoded?.user?.id).lean();
-        const userEmail = user ? user.email : "unknown@anonymous.com";
+        let userEmail = decoded?.user?.email || "unknown@anonymous.com";
+        if (mongoose.Types.ObjectId.isValid(decoded?.user?.id || "")) {
+            const user = await User.findById(decoded.user.id).lean();
+            userEmail = user?.email || userEmail;
+        }
 
-        // Save transcript
-        const transcript = await Transcript.create({
+        const transcriptPayload = {
             userId: decoded?.user?.id || "unknown",
             userEmail: userEmail,
             sessionId: sessionId || "unknown",
@@ -56,7 +63,22 @@ export async function POST(req) {
                 content: m.content,
                 timestamp: m.timestamp ? new Date(m.timestamp) : new Date()
             }))
-        });
+        };
+
+        const transcript = await Transcript.findOneAndUpdate(
+            {
+                userId: transcriptPayload.userId,
+                sessionId: transcriptPayload.sessionId
+            },
+            {
+                $set: transcriptPayload,
+                $setOnInsert: { createdAt: new Date() }
+            },
+            {
+                new: true,
+                upsert: true
+            }
+        );
 
         return NextResponse.json({
             success: true,
@@ -67,7 +89,102 @@ export async function POST(req) {
     } catch (error) {
         console.error("Transcript save error:", error);
         return NextResponse.json(
-            { success: false, message: "Failed to save transcript", error: error.message },
+            { success: false, message: "Failed to save transcript" },
+            { status: 500 }
+        );
+    }
+}
+
+export async function GET(req) {
+    try {
+        await dbConnect();
+
+        const authHeader = req.headers.get("authorization");
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return NextResponse.json(
+                { success: false, message: "Unauthorized: Missing or invalid token" },
+                { status: 401 }
+            );
+        }
+
+        const token = authHeader.split(" ")[1];
+        let decoded;
+        try {
+            decoded = jwt.verify(token, getJwtSecret());
+        } catch (err) {
+            return NextResponse.json(
+                { success: false, message: "Unauthorized: Invalid or expired token" },
+                { status: 401 }
+            );
+        }
+
+        const userId = decoded?.user?.id;
+        if (!userId) {
+            return NextResponse.json(
+                { success: false, message: "Unauthorized: Missing user" },
+                { status: 401 }
+            );
+        }
+
+        const transcripts = await Transcript.find({ userId })
+            .sort({ createdAt: -1 })
+            .limit(50)
+            .lean();
+
+        return NextResponse.json({
+            success: true,
+            transcripts
+        });
+    } catch (error) {
+        console.error("Transcript fetch error:", error);
+        return NextResponse.json(
+            { success: false, message: "Failed to fetch transcripts" },
+            { status: 500 }
+        );
+    }
+}
+
+export async function DELETE(req) {
+    try {
+        await dbConnect();
+
+        const authHeader = req.headers.get("authorization");
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return NextResponse.json(
+                { success: false, message: "Unauthorized: Missing or invalid token" },
+                { status: 401 }
+            );
+        }
+
+        const token = authHeader.split(" ")[1];
+        let decoded;
+        try {
+            decoded = jwt.verify(token, getJwtSecret());
+        } catch (err) {
+            return NextResponse.json(
+                { success: false, message: "Unauthorized: Invalid or expired token" },
+                { status: 401 }
+            );
+        }
+
+        const userId = decoded?.user?.id;
+        if (!userId) {
+            return NextResponse.json(
+                { success: false, message: "Unauthorized: Missing user" },
+                { status: 401 }
+            );
+        }
+
+        const result = await Transcript.deleteMany({ userId });
+
+        return NextResponse.json({
+            success: true,
+            deletedCount: result.deletedCount || 0
+        });
+    } catch (error) {
+        console.error("Transcript delete error:", error);
+        return NextResponse.json(
+            { success: false, message: "Failed to clear transcripts" },
             { status: 500 }
         );
     }

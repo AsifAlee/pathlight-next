@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Video, VideoOff, Mic, MicOff, PhoneOff, Loader2, Notebook, Send, MessageCircle, X } from "lucide-react";
+import { Video, VideoOff, Mic, MicOff, PhoneOff, Loader2, Notebook, Send, MessageCircle, X, Maximize2, Minimize2 } from "lucide-react";
 import toast from "react-hot-toast";
 import NotesSidebar from "./NotesSidebar";
 import { createClient, AnamClient } from "@anam-ai/js-sdk";
@@ -37,13 +37,22 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
     const [error, setError] = useState<string | null>(null);
     const [connectionStatus, setConnectionStatus] = useState("Requesting live avatar session...");
     const [muted, setMuted] = useState(false);
-    const [videoEnabled, setVideoEnabled] = useState(true);
+    const [videoEnabled, setVideoEnabled] = useState(false);
+    const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
+    const [isFullscreen, setIsFullscreen] = useState(false);
     const [isChatOpen, setIsChatOpen] = useState(false);
 
     // Anam State
+    const rootRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
+    const userCameraRef = useRef<HTMLVideoElement>(null);
     const anamClientRef = useRef<AnamClient | null>(null);
     const videoStartTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const inputAudioStreamRef = useRef<MediaStream | null>(null);
+    const cameraStreamRef = useRef<MediaStream | null>(null);
+    const sessionIdRef = useRef<string>(typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : `session-${Date.now()}`);
+    const saveInProgressRef = useRef(false);
+    const lastSavedSignatureRef = useRef("");
 
     // Chat State
     const [messages, setMessages] = useState<Message[]>([]);
@@ -77,6 +86,21 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
         }
     };
 
+    const stopInputAudioStream = () => {
+        inputAudioStreamRef.current?.getTracks().forEach((track) => track.stop());
+        inputAudioStreamRef.current = null;
+    };
+
+    const stopUserCamera = () => {
+        cameraStreamRef.current?.getTracks().forEach((track) => track.stop());
+        cameraStreamRef.current = null;
+        if (userCameraRef.current) {
+            userCameraRef.current.srcObject = null;
+        }
+        setCameraStream(null);
+        setVideoEnabled(false);
+    };
+
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
@@ -85,6 +109,21 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
     useEffect(() => {
         messagesRef.current = messages;
     }, [messages]);
+
+    useEffect(() => {
+        if (userCameraRef.current) {
+            userCameraRef.current.srcObject = cameraStream;
+        }
+    }, [cameraStream]);
+
+    useEffect(() => {
+        const handleFullscreenChange = () => {
+            setIsFullscreen(Boolean(document.fullscreenElement));
+        };
+
+        document.addEventListener("fullscreenchange", handleFullscreenChange);
+        return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    }, []);
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -101,25 +140,48 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const saveTranscript = async () => {
+        if (saveInProgressRef.current || messagesRef.current.length === 0) return;
+
+        const signature = JSON.stringify(messagesRef.current.map((message) => [
+            message.role,
+            message.content,
+            new Date(message.timestamp).getTime()
+        ]));
+
+        if (signature === lastSavedSignatureRef.current) return;
+
+        saveInProgressRef.current = true;
+        try {
+            const response = await fetch("/api/anam/transcript", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token") || ""}`
+                },
+                body: JSON.stringify({
+                    sessionId: sessionIdRef.current,
+                    personaId: personaConfig?.personaId || personaConfig?.avatarId || "emily",
+                    messages: messagesRef.current
+                }),
+                keepalive: true
+            });
+
+            if (response.ok) {
+                lastSavedSignatureRef.current = signature;
+            }
+        } catch (err) {
+            console.error("Failed to save transcript:", err);
+        } finally {
+            saveInProgressRef.current = false;
+        }
+    };
+
     const stopCall = async () => {
         if (anamClientRef.current) {
             try {
                 clearVideoStartTimeout();
-                // Save transcript before stopping
-                if (messagesRef.current.length > 0) {
-                    await fetch("/api/anam/transcript", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${localStorage.getItem("token") || ""}`
-                        },
-                        body: JSON.stringify({
-                            sessionId: (anamClientRef.current as AnamClient & { sessionId?: string }).sessionId || "unknown",
-                            personaId: personaConfig?.personaId || "unknown",
-                            messages: messagesRef.current
-                        })
-                    }).catch(err => console.error("Failed to save transcript:", err));
-                }
+                await saveTranscript();
 
                 await anamClientRef.current.stopStreaming();
             } catch (error) {
@@ -127,6 +189,8 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
             }
             anamClientRef.current = null;
         }
+        stopInputAudioStream();
+        stopUserCamera();
         setConnected(false);
     };
 
@@ -138,20 +202,7 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
             setError(null);
             setConnectionStatus("Requesting live avatar session...");
 
-            // 1. Get Session Token
-            // Inject language instruction into system prompt
-            let updatedSystemPrompt = personaConfig?.systemPrompt || "";
-            if (language === 'es') {
-                updatedSystemPrompt += " IMPORTANT: You MUST speak in Spanish (Español).";
-            } else if (language === 'ja') {
-                updatedSystemPrompt += " IMPORTANT: You MUST speak in Japanese (日本語).";
-            }
-
-            const activePersonaConfig = {
-                ...personaConfig,
-                systemPrompt: updatedSystemPrompt
-            };
-
+            // 1. Get a server-generated Anam session token.
             const tokenResponse = await fetch("/api/anam/session-token", {
                 method: "POST",
                 headers: {
@@ -159,7 +210,7 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
                     "Authorization": `Bearer ${localStorage.getItem("token") || ""}`
                 },
                 body: JSON.stringify({
-                    personaConfig: activePersonaConfig
+                    language
                 }),
                 signal
             });
@@ -174,9 +225,24 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
             // Check if aborted before continuing (though fetch would normally throw)
             if (signal?.aborted) return;
 
+            setConnectionStatus("Checking microphone access...");
+            if (!navigator.mediaDevices?.getUserMedia) {
+                throw new Error("Microphone access is not supported in this browser. Try Chrome or Edge.");
+            }
+
+            const inputAudioStream = await navigator.mediaDevices.getUserMedia({
+                audio: {
+                    echoCancellation: true,
+                    noiseSuppression: true,
+                    autoGainControl: true
+                }
+            });
+            inputAudioStreamRef.current = inputAudioStream;
+            setMuted(false);
+
             // 2. Initialize Anam Client
             const client = createClient(sessionToken, {
-                // Options can be added here if needed, e.g. disableInputAudio: false
+                disableInputAudio: false
             });
 
             anamClientRef.current = client;
@@ -222,10 +288,18 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
                 setConnectionStatus("Microphone granted. Connecting live avatar...");
             });
 
+            client.addListener("INPUT_AUDIO_STREAM_STARTED", () => {
+                setConnectionStatus("Microphone connected. Emily can hear you.");
+            });
+
             // 3. Start Streaming
             if (videoRef.current) {
                 setConnectionStatus("Opening live avatar stream...");
-                await client.streamToVideoElement("anam-video-element");
+                // The Anam docs support this second MediaStream argument, but the installed
+                // SDK type definition is stale and only declares the first parameter.
+                // @ts-expect-error Anam streamToVideoElement accepts a custom input stream.
+                await client.streamToVideoElement("anam-video-element", inputAudioStream);
+                setConnectionStatus("Microphone connected. Emily can hear you.");
                 clearVideoStartTimeout();
                 videoStartTimeoutRef.current = setTimeout(() => {
                     setConnecting(false);
@@ -249,6 +323,8 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
                 timestamp: new Date()
             };
             setMessages([greeting]);
+            messagesRef.current = [greeting];
+            saveTranscript();
 
             // Add event listener for message history
             client.addListener("MESSAGE_HISTORY_UPDATED", (history: Array<{ role: string; content: string }>) => {
@@ -259,7 +335,10 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
                     timestamp: new Date()
                 }));
                 // Prepend our custom greeting to the history
-                setMessages([greeting, ...formattedMessages]);
+                const nextMessages = [greeting, ...formattedMessages];
+                setMessages(nextMessages);
+                messagesRef.current = nextMessages;
+                saveTranscript();
             });
 
             toast.success("Connected to session! 🎥");
@@ -276,6 +355,7 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
             // Do not set error if we are already connected (handling race condition where one succeeds)
             if (!connected) {
                 clearVideoStartTimeout();
+                stopInputAudioStream();
                 const message = err instanceof Error ? err.message : "Failed to connect";
                 setError(message);
                 setConnecting(false);
@@ -288,28 +368,68 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
         if (!anamClientRef.current) return;
 
         try {
-            if (muted) {
-                anamClientRef.current.unmuteInputAudio();
-                toast.success("Microphone unmuted");
-            } else {
+            const nextMuted = !muted;
+            inputAudioStreamRef.current?.getAudioTracks().forEach((track) => {
+                track.enabled = !nextMuted;
+            });
+            if (nextMuted) {
                 anamClientRef.current.muteInputAudio();
                 toast.success("Microphone muted");
+            } else {
+                anamClientRef.current.unmuteInputAudio();
+                toast.success("Microphone unmuted");
             }
-            setMuted(!muted);
+            setMuted(nextMuted);
         } catch (e) {
             console.error("Error toggling mute", e);
+            toast.error("Could not change microphone state");
         }
     };
 
-    // Anam SDK might not support toggling user video in the same way as simple WebRTC, 
-    // usually it controls the *avatar's* video or the user's *input* audio.
-    // Assuming videoEnabled controls the user's camera visibility to themself or just UI state for now
-    // since Anam is primarily about the avatar. 
-    // If Anam SDK has input video (for vision capability), we'd toggle that.
-    // For now, we'll keep the UI state.
-    const toggleVideo = () => {
-        setVideoEnabled(!videoEnabled);
-        toast.success(videoEnabled ? "Camera off" : "Camera on");
+    const toggleVideo = async () => {
+        if (videoEnabled || cameraStreamRef.current) {
+            stopUserCamera();
+            toast.success("Camera preview off");
+            return;
+        }
+
+        try {
+            if (!navigator.mediaDevices?.getUserMedia) {
+                toast.error("Camera is not supported in this browser");
+                return;
+            }
+
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: {
+                    facingMode: "user",
+                    width: { ideal: 720 },
+                    height: { ideal: 1280 }
+                },
+                audio: false
+            });
+
+            cameraStreamRef.current = stream;
+            setCameraStream(stream);
+            setVideoEnabled(true);
+            toast.success("Camera preview on");
+        } catch (error) {
+            console.error("Camera preview failed:", error);
+            toast.error("Camera is blocked or unavailable");
+            stopUserCamera();
+        }
+    };
+
+    const toggleFullscreen = async () => {
+        try {
+            if (!document.fullscreenElement) {
+                await rootRef.current?.requestFullscreen();
+            } else {
+                await document.exitFullscreen();
+            }
+        } catch (error) {
+            console.error("Fullscreen failed:", error);
+            toast.error("Fullscreen is not available in this browser");
+        }
     };
 
     const handleSendMessage = async (e: React.FormEvent) => {
@@ -317,22 +437,40 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
 
         if (!inputValue.trim() || !anamClientRef.current) return;
 
+        const trimmedInput = inputValue.trim();
         const userMessage: Message = {
             role: "user",
-            content: inputValue,
+            content: trimmedInput,
             timestamp: new Date()
         };
 
-        setMessages(prev => [...prev, userMessage]);
+        const nextMessages = [...messagesRef.current, userMessage];
+        setMessages(nextMessages);
+        messagesRef.current = nextMessages;
         setInputValue("");
         setLoading(true);
 
         try {
+            if (/\b(can|do)\s+you\s+hear\s+me\b/i.test(trimmedInput)) {
+                const typedOnlyResponse: Message = {
+                    role: "counselor",
+                    content: "No, I can read this typed chat message, but I only hear you when you speak through the microphone.",
+                    timestamp: new Date()
+                };
+                const responseMessages = [...nextMessages, typedOnlyResponse];
+                setMessages(responseMessages);
+                messagesRef.current = responseMessages;
+                await saveTranscript();
+                setLoading(false);
+                return;
+            }
+
             // Anam SDK likely has a method to send text message to the persona
             // Based on d.ts: talk(content: string) makes the persona speak
             // sendUserMessage(content: string) sends a user text message
 
             anamClientRef.current.sendUserMessage(userMessage.content);
+            saveTranscript();
 
             // We might need to listen for events to get the response text back if we want to display it
             // For now, we assume the avatar speaking is the response.
@@ -363,9 +501,9 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
     };
 
     return (
-        <div className="relative w-full h-full flex flex-col lg:flex-row gap-2 lg:gap-4 bg-slate-50 rounded-2xl overflow-hidden">
+        <div ref={rootRef} className="relative w-full h-full min-h-screen bg-slate-950 overflow-hidden">
             {/* Video Section */}
-            <div className="w-full h-full lg:w-2/3 lg:h-full bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl overflow-hidden relative shrink-0">
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-800 overflow-hidden">
 
                 {/* Connecting Overlay */}
                 {connecting && (
@@ -402,57 +540,92 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
                     />
                 </div>
 
+                {cameraStream && (
+                    <div className="absolute right-4 top-4 z-20 w-28 overflow-hidden rounded-2xl border border-white/30 bg-black shadow-2xl sm:right-6 sm:top-6 sm:w-40">
+                        <video
+                            ref={userCameraRef}
+                            autoPlay
+                            playsInline
+                            muted
+                            className="aspect-[9/16] w-full object-cover"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-black/45 px-2 py-1 text-center text-[10px] font-semibold text-white">
+                            Your camera
+                        </div>
+                    </div>
+                )}
+
                 {/* Video Controls Overlay */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 z-10 w-full justify-center px-4 overflow-x-auto">
+                <div className="fixed bottom-5 left-1/2 z-[80] flex w-full max-w-xl -translate-x-1/2 items-center justify-center gap-2 px-3 pb-[env(safe-area-inset-bottom)] sm:bottom-8 sm:gap-4 sm:px-4">
 
                     {/* Mute Button */}
                     <button
                         onClick={toggleMute}
-                        className={`w-14 h-14 rounded-full flex items-center justify-center transition-all shadow-lg flex-shrink-0 ${muted
+                        className={`w-12 h-12 rounded-full flex items-center justify-center transition-all shadow-lg flex-shrink-0 sm:h-14 sm:w-14 ${muted
                             ? "bg-red-500 hover:bg-red-600"
                             : "bg-slate-700/90 hover:bg-slate-600 backdrop-blur-md"
                             }`}
                         title={muted ? "Unmute" : "Mute"}
                     >
                         {muted ? (
-                            <MicOff className="w-6 h-6 text-white" />
+                            <MicOff className="h-5 w-5 text-white sm:h-6 sm:w-6" />
                         ) : (
-                            <Mic className="w-6 h-6 text-white" />
+                            <Mic className="h-5 w-5 text-white sm:h-6 sm:w-6" />
                         )}
                     </button>
 
                     {/* Video Toggle Button (stubbed for Anam) */}
                     <button
                         onClick={toggleVideo}
-                        className={`w-14 h-14 rounded-full flex items-center justify-center transition-all shadow-lg flex-shrink-0 ${!videoEnabled
+                        className={`w-12 h-12 rounded-full flex items-center justify-center transition-all shadow-lg flex-shrink-0 sm:h-14 sm:w-14 ${!videoEnabled
                             ? "bg-red-500 hover:bg-red-600"
                             : "bg-slate-700/90 hover:bg-slate-600 backdrop-blur-md"
                             }`}
-                        title={videoEnabled ? "Turn off camera" : "Turn on camera"}
+                        title={videoEnabled ? "Turn off camera preview" : "Turn on camera preview"}
                     >
                         {videoEnabled ? (
-                            <Video className="w-6 h-6 text-white" />
+                            <Video className="h-5 w-5 text-white sm:h-6 sm:w-6" />
                         ) : (
-                            <VideoOff className="w-6 h-6 text-white" />
+                            <VideoOff className="h-5 w-5 text-white sm:h-6 sm:w-6" />
+                        )}
+                    </button>
+
+                    <button
+                        onClick={toggleFullscreen}
+                        className="w-12 h-12 rounded-full bg-slate-700/90 hover:bg-slate-600 backdrop-blur-md flex items-center justify-center transition-all shadow-lg flex-shrink-0 sm:h-14 sm:w-14"
+                        title={isFullscreen ? "Exit fullscreen" : "Go fullscreen"}
+                    >
+                        {isFullscreen ? (
+                            <Minimize2 className="h-5 w-5 text-white sm:h-6 sm:w-6" />
+                        ) : (
+                            <Maximize2 className="h-5 w-5 text-white sm:h-6 sm:w-6" />
                         )}
                     </button>
 
                     {/* End Call Button */}
                     <button
                         onClick={handleEndCall}
-                        className="w-14 h-14 rounded-full bg-red-600 hover:bg-red-700 flex items-center justify-center transition-all shadow-lg flex-shrink-0"
+                        className="w-12 h-12 rounded-full bg-red-600 hover:bg-red-700 flex items-center justify-center transition-all shadow-lg flex-shrink-0 sm:h-14 sm:w-14"
                         title="End Session"
                     >
-                        <PhoneOff className="w-6 h-6 text-white" />
+                        <PhoneOff className="h-5 w-5 text-white sm:h-6 sm:w-6" />
+                    </button>
+
+                    <button
+                        onClick={() => setIsChatOpen(true)}
+                        className="w-12 h-12 rounded-full bg-orange-600 hover:bg-orange-700 flex items-center justify-center transition-all shadow-lg flex-shrink-0 sm:h-14 sm:w-14"
+                        title="Open Chat"
+                    >
+                        <MessageCircle className="h-5 w-5 text-white sm:h-6 sm:w-6" />
                     </button>
 
                     {/* Notes Button */}
                     <button
                         onClick={() => setShowNotes(true)}
-                        className="w-14 h-14 rounded-full bg-orange-600 hover:bg-orange-700 flex items-center justify-center transition-all shadow-lg hidden sm:flex flex-shrink-0"
+                        className="w-12 h-12 rounded-full bg-orange-600 hover:bg-orange-700 flex items-center justify-center transition-all shadow-lg flex-shrink-0 sm:h-14 sm:w-14"
                         title="Open Notes"
                     >
-                        <Notebook className="w-6 h-6 text-white" />
+                        <Notebook className="h-5 w-5 text-white sm:h-6 sm:w-6" />
                     </button>
                 </div>
 
@@ -465,10 +638,10 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
 
             {/* Chat Section */}
             <div className={`
-                fixed inset-y-0 left-0 w-80 max-w-[85vw] h-full z-40 lg:static lg:h-full lg:w-1/3 lg:z-auto
+                fixed inset-y-0 right-0 w-80 max-w-[85vw] h-full z-40 lg:w-96 lg:max-w-sm
                 transition-transform duration-300 ease-in-out
-                ${isChatOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-                flex flex-col bg-white shadow-2xl lg:shadow-xl overflow-hidden border-r-2 lg:border-2 border-orange-100
+                ${isChatOpen ? 'translate-x-0' : 'translate-x-full'}
+                flex flex-col bg-white shadow-2xl overflow-hidden border-l-2 border-orange-100
             `}>
                 {/* Chat Header */}
                 <div className="bg-gradient-to-r from-orange-500 to-amber-600 text-white p-4 flex items-center justify-between shrink-0">
@@ -479,10 +652,11 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
                             <p className="text-orange-100 text-xs">Ask questions anytime</p>
                         </div>
                     </div>
-                    {/* Mobile Close Button */}
                     <button
                         onClick={() => setIsChatOpen(false)}
-                        className="lg:hidden p-2 hover:bg-white/20 rounded-full transition-colors"
+                        className="p-2 hover:bg-white/20 rounded-full transition-colors"
+                        aria-label="Close live chat"
+                        title="Close live chat"
                     >
                         <X size={24} />
                     </button>
@@ -543,17 +717,6 @@ export default function AnamVideoCallInterface({ onEndCall, personaConfig, langu
                     className="fixed inset-0 bg-black/50 z-30 lg:hidden"
                     onClick={() => setIsChatOpen(false)}
                 />
-            )}
-
-            {/* Mobile Chat FAB */}
-            {!isChatOpen && (
-                <button
-                    onClick={() => setIsChatOpen(true)}
-                    className="fixed bottom-28 right-8 w-14 h-14 bg-orange-600 text-white rounded-full shadow-xl hover:bg-orange-700 hover:scale-110 transition-all z-30 lg:hidden flex items-center justify-center animate-in fade-in zoom-in duration-300"
-                    title="Open Chat"
-                >
-                    <MessageCircle size={28} />
-                </button>
             )}
 
             {/* Notes Sidebar */}
