@@ -15,6 +15,8 @@ interface NavbarProps {
 export default function Navbar({ onNavigate, onAuth }: NavbarProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { t } = useTranslation();
+    void onAuth;
+
     return (
         <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-orange-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,6 +32,7 @@ export default function Navbar({ onNavigate, onAuth }: NavbarProps) {
                         <button onClick={() => onNavigate('#features')} className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">{t('nav.features')}</button>
                         <button onClick={() => onNavigate('#how-it-works')} className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">{t('nav.how_it_works')}</button>
                         <button onClick={() => onNavigate('guides')} className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">{t('nav.guides')}</button>
+                        <a href="/beta-access" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Beta Access</a>
                         <div className="flex items-center gap-3 pl-4 border-l border-slate-200">
                             <a href="/dashboard" className="bg-primary text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-orange-600 transition-all shadow-md hover:shadow-lg">
                                 {t('nav.dashboard')}
@@ -51,6 +54,7 @@ export default function Navbar({ onNavigate, onAuth }: NavbarProps) {
                     <button onClick={() => { onNavigate('#features'); setIsMenuOpen(false); }} className="block w-full text-left text-slate-600 font-medium py-2">{t('nav.features')}</button>
                     <button onClick={() => { onNavigate('#how-it-works'); setIsMenuOpen(false); }} className="block w-full text-left text-slate-600 font-medium py-2">{t('nav.how_it_works')}</button>
                     <button onClick={() => { onNavigate('guides'); setIsMenuOpen(false); }} className="block w-full text-left text-slate-600 font-medium py-2">{t('nav.guides')}</button>
+                    <a href="/beta-access" className="block w-full text-left text-slate-600 font-medium py-2">Beta Access</a>
                     <div className="pt-4 border-t border-slate-100 flex flex-col gap-3">
                         <a href="/dashboard" className="w-full bg-primary text-white py-3 rounded-xl font-medium shadow-lg shadow-primary/20 text-center">
                             {t('nav.dashboard')}
