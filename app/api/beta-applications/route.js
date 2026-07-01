@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnect';
 import BetaApplication from '@/models/BetaApplication';
+import { appendBetaApplicationToSheet } from '@/lib/googleSheets';
 
 const requiredFields = [
     'fullName',
@@ -56,10 +57,19 @@ export async function POST(request) {
 
         await dbConnect();
         const application = await BetaApplication.create(payload);
+        let sheetSynced = false;
+
+        try {
+            const sheetResult = await appendBetaApplicationToSheet(application.toObject());
+            sheetSynced = !sheetResult.skipped;
+        } catch (sheetError) {
+            console.error('Google Sheets sync error:', sheetError);
+        }
 
         return NextResponse.json({
             ok: true,
             applicationId: application._id,
+            sheetSynced,
             message: 'Application submitted. We review every response and reply within a few days.',
         }, { status: 201 });
     } catch (error) {
